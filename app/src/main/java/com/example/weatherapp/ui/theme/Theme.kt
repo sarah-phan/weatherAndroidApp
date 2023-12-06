@@ -6,59 +6,42 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-/* Other default colors to override
-background = Color(0xFFFFFBFE),
-surface = Color(0xFFFFFBFE),
-onPrimary = Color.White,
-onSecondary = Color.White,
-onTertiary = Color.White,
-onBackground = Color(0xFF1C1B1F),
-onSurface = Color(0xFF1C1B1F),
-*/
-
-
-//@Composable
-//fun ContactsTheme(
-//    darkTheme: Boolean = isSystemInDarkTheme(),
-//    // Dynamic color is available on Android 12+
-//    dynamicColor: Boolean = true,
-//    content: @Composable () -> Unit
-//) {
-//    val colorScheme = when {
-//        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-//            val context = LocalContext.current
-//            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-//        }
-//
-//        darkTheme -> DarkColorScheme
-//        else -> LightColorScheme
-//    }
-//    val view = LocalView.current
-//    if (!view.isInEditMode) {
-//        SideEffect {
-//            val window = (view.context as Activity).window
-//            window.statusBarColor = colorScheme.primary.toArgb()
-//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
-//        }
-//    }
-//
-//    MaterialTheme(
-//        colorScheme = colorScheme,
-//        typography = Typography,
-//        content = content
-//    )
-//}
-
 private val DarkColorPalette = darkColorScheme(
-    primary = Purple200,
-    primaryContainer = Purple700,
-    secondary = Teal200
+    primary = theme_dark_primary,
+    onPrimary = theme_dark_onPrimary,
+    primaryContainer = theme_dark_primaryContainer,
+    onPrimaryContainer = theme_dark_onPrimaryContainer,
+    secondary = theme_dark_secondary,
+    onSecondary = theme_dark_onSecondary,
+    secondaryContainer = theme_dark_secondaryContainer,
+    onSecondaryContainer = theme_dark_onSecondaryContainer,
+    tertiary = theme_dark_tertiary,
+    onTertiary = theme_dark_onTertiary,
+    tertiaryContainer = theme_dark_tertiaryContainer,
+    onTertiaryContainer = theme_dark_onTertiaryContainer,
+    surface = theme_dark_surface,
+    onSurface = theme_dark_onSurface,
+    error = theme_dark_error,
+    onError = theme_dark_onError
 )
 
 private val LightColorPalette = lightColorScheme(
-    primary = Purple500,
-    primaryContainer =  Purple700,
-    secondary = Teal200
+    primary = theme_light_primary,
+    onPrimary = theme_light_onPrimary,
+    primaryContainer = theme_light_primaryContainer,
+    onPrimaryContainer = theme_light_onPrimaryContainer,
+    secondary = theme_light_secondary,
+    onSecondary = theme_light_onSecondary,
+    secondaryContainer = theme_light_secondaryContainer,
+    onSecondaryContainer = theme_light_onSecondaryContainer,
+    tertiary = theme_light_tertiary,
+    onTertiary = theme_light_onTertiary,
+    tertiaryContainer = theme_light_tertiaryContainer,
+    onTertiaryContainer = theme_light_onTertiaryContainer,
+    surface = theme_light_surface,
+    onSurface = theme_light_onSurface,
+    error = theme_light_error,
+    onError = theme_light_onError
 )
 
 @Composable
