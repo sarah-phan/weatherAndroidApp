@@ -2,6 +2,7 @@ package com.example.weatherapp.ui.screen
 
 import android.content.Intent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,15 +15,24 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.BottomSheetDefaults
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,36 +48,45 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.weatherapp.R
-import com.example.weatherapp.ui.theme.LightText
+import com.example.weatherapp.ui.theme.LightColorPalette
+import com.example.weatherapp.ui.theme.theme_light_tertiary
 import com.example.weatherapp.ui.theme.Poppins
 import com.example.weatherapp.ui.theme.ReemKufi
 import com.example.weatherapp.ui.theme.searchShape
-
+import com.example.weatherapp.ui.theme.theme_light_onPrimary
+import com.example.weatherapp.ui.theme.theme_light_primaryContainer
+import com.example.weatherapp.ui.theme.theme_light_secondary
 
 @Composable
 fun HomeScreen(){
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text ="Search for city",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 20.dp),
-            textAlign = TextAlign.Center,
-            fontFamily = ReemKufi,
-            color = LightText
-        )
-        SearchBox()
-        Cards()
-    }
+//    Column(
+//        modifier = Modifier.fillMaxWidth(),
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ) {
+//        Text(
+//            text ="Search for city",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(top = 20.dp),
+//            textAlign = TextAlign.Center,
+//            fontFamily = ReemKufi,
+//            color = theme_light_tertiary
+//        )
+//        SearchBox()
+//        Cards()
+//        Divider(
+//            color = Color.Gray, thickness = 3.dp
+//        )
+//    }
+    Scaffold()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -96,7 +115,7 @@ fun SearchBox(){
             Icon(
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = "",
-                tint = LightText,
+                tint = theme_light_tertiary,
                 modifier = Modifier.size(20.dp))
         }
     )
@@ -140,7 +159,7 @@ fun CardUI(temperature: String,city:String,resourceId:Int,humidity:String,wind:S
             elevation = CardDefaults.cardElevation(defaultElevation = 10.dp))
         {
             Column(modifier = Modifier.padding(10.dp)){
-                Text(text = city, fontFamily = Poppins, fontSize = 14.sp, color = LightText)
+                Text(text = city, fontFamily = Poppins, fontSize = 14.sp, color = theme_light_tertiary)
                 Spacer(modifier = Modifier.height(0.dp))
                 Text(
                     text = getTemperature(temp = temperature).toAnnotatedString(),
@@ -155,26 +174,26 @@ fun CardUI(temperature: String,city:String,resourceId:Int,humidity:String,wind:S
                         painter = painterResource(resourceId),
                         contentDescription = "",
                         Modifier.size(14.dp),
-                        tint = LightText
+                        tint = theme_light_tertiary
                     )
                     Text(
                         text = humidity,
                         fontFamily = Poppins,
                         fontSize = 12.sp,
-                        color = LightText
+                        color = theme_light_tertiary
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Icon(
                         painter = painterResource(R.drawable.ic_wind),
                         contentDescription = "",
                         Modifier.size(14.dp),
-                        tint = LightText
+                        tint = theme_light_tertiary
                     )
                     Text(
                         text = wind,
                         fontFamily = Poppins,
                         fontSize = 12.sp,
-                        color = LightText
+                        color = theme_light_tertiary
                     )
                 }
             }
@@ -192,6 +211,149 @@ fun CardUI(temperature: String,city:String,resourceId:Int,humidity:String,wind:S
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Scaffold(){
+    BottomSheetScaffold(
+        sheetContent = {
+            BSheet()
+        },
+
+        scaffoldState = rememberBottomSheetScaffoldState(),
+        sheetPeekHeight = 250.dp,
+        sheetContainerColor = theme_light_onPrimary
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text ="Search for city",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                textAlign = TextAlign.Center,
+                fontFamily = ReemKufi,
+                color = theme_light_tertiary
+            )
+            SearchBox()
+            Cards()
+//            Divider(
+//                color = Color.Gray, thickness = 3.dp
+//            )
+        }
+
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BSheet(){
+    val list = listOf("MON","TUE","WED","THU","FRI","SAT","SUN")
+    val periods = listOf("6","12","18","24")
+    Column(
+        verticalArrangement = Arrangement.Center,
+
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = LightColorPalette.secondary)
+    ){
+
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ){
+            Button(
+                onClick = { /*TODO*/ },
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(
+                ) ) {
+                Text(text ="Hourly Forecast",color = Color.Black)
+            }
+            Button(
+                onClick = { /*TODO*/ },
+                shape = RoundedCornerShape(10.dp),
+            ) {
+                Text(text ="Weekly Forecast",color = Color.Black)
+            }
+        }
+        Divider(
+            color = Color.Gray, thickness = 1.dp
+        )
+        LazyRow(modifier= Modifier
+            .fillMaxWidth()
+            .padding(10.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly){
+            items(items = list){item->
+                WeeklyBox(day = item,date = "2/12")
+            }
+        }
+        LazyColumn(modifier=Modifier.padding(20.dp),
+             ){
+            items(items = periods){item->
+                PeriodData(period = item,temp = "10", feels = "10")
+            }
+        }
+    }
+}
+@Composable
+fun WeeklyBox(day: String,date:String){
+    Box(
+        modifier = Modifier
+            .height(100.dp)
+            .background(
+                color = LightColorPalette.primaryContainer,
+                shape = RoundedCornerShape(50.dp)
+            )
+    ){
+        Text(text="$day\r\n$date", textAlign = TextAlign.Center,modifier = Modifier
+            .align(Alignment.Center)
+            .padding(6.dp), color = Color.White)
+//        Icon(
+//            painterResource(id = R.drawable.ic_weather1),
+//            modifier = Modifier.align(Alignment.Center).size( 10.dp),
+//            contentDescription = "")
+//        Text(text="$date",modifier = Modifier.align(Alignment.BottomCenter))
+
+    }
+}
+@Composable
+fun PeriodData(period: String,temp:String,feels:String){
+    Row(){
+        Box(
+            modifier = Modifier
+                .width(50.dp)
+                .padding(top = 15.dp)
+                .background(color = LightColorPalette.tertiary, shape = RoundedCornerShape(2.dp))
+        ){
+            Text(text ="$period h",textAlign = TextAlign.Center,modifier = Modifier
+                .align(Alignment.Center)
+                .padding(6.dp), color = Color.White)
+        }
+        Box(){
+            Text(
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(horizontal = 50.dp, vertical = 6.dp),
+                color = LightColorPalette.onSurface,
+                text= buildAnnotatedString {
+                    append("Temperature  ")
+                    withStyle(style =SpanStyle( fontWeight = FontWeight.Bold)){
+                        append("$temp° \r\n")
+                    }
+                    append("Feels like  ")
+                    withStyle(style =SpanStyle( fontWeight = FontWeight.Bold)){
+                        append("$feels° \r\n")
+                    }
+                },
+            )
+
+        }
+    }
+}
 
 fun getTemperature(temp: String): AnnotatedString.Builder{
     val annotatedString = AnnotatedString.Builder(temp)

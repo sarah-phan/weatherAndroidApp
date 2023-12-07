@@ -28,11 +28,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.weatherapp.HomeActivity
 import com.example.weatherapp.R
-import com.example.weatherapp.ui.theme.LightText
-import com.example.weatherapp.ui.theme.Primary
+import com.example.weatherapp.ui.theme.theme_light_tertiary
+import com.example.weatherapp.ui.theme.theme_light_primary
 import com.example.weatherapp.ui.theme.ReemKufi
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.ui.theme.bottomShape
+import com.example.weatherapp.ui.theme.theme_light_onPrimaryContainer
+
 
 @Composable
 fun SplashScreen(){
@@ -42,7 +44,7 @@ fun SplashScreen(){
         .apply{
             addStyle(
                 SpanStyle(
-                    color = Primary,
+                    color = theme_light_primary,
                     fontSize = 30.sp
                 ), start = 0, end = 4
             )
@@ -83,7 +85,7 @@ fun SplashScreen(){
                     fontFamily = ReemKufi,
                     fontSize = 18.sp,
                     textAlign = TextAlign.Center,
-                    color = LightText)
+                    color = theme_light_tertiary)
                 Spacer(modifier = Modifier.height(36.dp))
                 Button(
 
@@ -91,8 +93,8 @@ fun SplashScreen(){
                         mContext.startActivity(intent)
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Primary,
-                        contentColor = com.example.weatherapp.ui.theme.White
+                        containerColor = theme_light_primary,
+                        contentColor = theme_light_onPrimaryContainer
                     ),
                     contentPadding = PaddingValues(horizontal = 30.dp,vertical = 10.dp),
                     modifier = Modifier.clip(shape = Shapes.medium)

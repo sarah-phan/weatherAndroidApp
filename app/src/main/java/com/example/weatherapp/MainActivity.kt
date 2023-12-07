@@ -33,9 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.weatherapp.ui.screen.HomeScreen
 import com.example.weatherapp.ui.screen.SplashScreen
-import com.example.weatherapp.ui.theme.PrimaryBackground
+import com.example.weatherapp.ui.theme.theme_light_primary
 import com.example.weatherapp.ui.theme.WeatherAppTheme
-import com.example.weatherapp.ui.theme.PrimaryBackground
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,10 +42,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAppTheme {
                 Surface(
-                    color = PrimaryBackground,
+                    color = theme_light_primary,
                     modifier = Modifier.fillMaxSize()) {
-                    SplashScreen()
-                    //HomeScreen()
+                    //SplashScreen()
+                    HomeScreen()
                 }
             }
         }
