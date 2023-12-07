@@ -1,16 +1,21 @@
 package com.example.weatherapp.ui.screen
 
 import android.content.Intent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,7 +23,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.BottomSheetScaffoldState
@@ -218,31 +225,31 @@ fun Scaffold(){
         sheetContent = {
             BSheet()
         },
-
         scaffoldState = rememberBottomSheetScaffoldState(),
         sheetPeekHeight = 250.dp,
-        sheetContainerColor = theme_light_onPrimary
+        sheetContainerColor = theme_light_onPrimary,
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text ="Search for city",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
-                textAlign = TextAlign.Center,
-                fontFamily = ReemKufi,
-                color = theme_light_tertiary
-            )
-            SearchBox()
-            Cards()
+//        Column(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            Text(
+//                text ="Search for city",
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(top = 20.dp),
+//                textAlign = TextAlign.Center,
+//                fontFamily = ReemKufi,
+//                color = theme_light_tertiary
+//            )
+//            SearchBox()
+//            Cards()
 //            Divider(
 //                color = Color.Gray, thickness = 3.dp
 //            )
-        }
-
+        //}
+        Image(painterResource(id = R.drawable.bg_light), contentDescription ="",
+            modifier = Modifier.fillMaxHeight(), contentScale = ContentScale.Crop)
     }
 }
 
@@ -251,12 +258,15 @@ fun Scaffold(){
 fun BSheet(){
     val list = listOf("MON","TUE","WED","THU","FRI","SAT","SUN")
     val periods = listOf("6","12","18","24")
+    val details = listOf("Max Temperature","Min Temperature","Rain","Humidity","Visibility","Cloud"
+        ,"Snow probability","Ice probability","Wind direction","Wind gust","Wind speed")
     Column(
         verticalArrangement = Arrangement.Center,
 
         modifier = Modifier
             .fillMaxWidth()
             .background(color = LightColorPalette.secondary)
+            .verticalScroll(rememberScrollState())
     ){
 
         Row(
@@ -290,11 +300,63 @@ fun BSheet(){
                 WeeklyBox(day = item,date = "2/12")
             }
         }
-        LazyColumn(modifier=Modifier.padding(20.dp),
+        LazyColumn(modifier= Modifier
+            .padding(20.dp)
+            .height(290.dp),
              ){
             items(items = periods){item->
                 PeriodData(period = item,temp = "10", feels = "10")
             }
+        }
+        val card = RoundedCornerShape(20.dp)
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
+                .border(BorderStroke(2.dp, Color.Gray), shape = RoundedCornerShape(20.dp)),
+            colors = CardDefaults.cardColors(
+                containerColor = LightColorPalette.secondary
+            )
+        ) {
+            Text(
+                text = "Details",
+                fontWeight = FontWeight.SemiBold ,
+                fontSize = 20.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(10.dp))
+            LazyColumn(modifier= Modifier
+                .padding(horizontal = 20.dp, vertical = 5.dp)
+                .height(380.dp), ){
+                items(items = details){item->
+//                    Text(
+//                        modifier = Modifier
+//                            .padding(vertical = 5.dp),
+//                        color = LightColorPalette.onSurface,
+//                        text= buildAnnotatedString {
+//                            append("$item       ")
+//                            withStyle(style =SpanStyle(fontWeight = FontWeight.Bold)){
+//                                append("32°")
+//                            }
+//                        },
+//                    )
+                    Row(modifier = Modifier.padding(vertical = 5.dp)){
+                        Text(modifier = Modifier.width(200.dp),
+                            color = LightColorPalette.onSurface,
+                            text= "$item",
+                            textAlign = TextAlign.Start
+                        )
+                        Text(modifier = Modifier.padding(horizontal = 20.dp),
+                            color = LightColorPalette.onSurface,
+                            text= "32°",
+                            textAlign = TextAlign.Start,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+            }
+
         }
     }
 }
@@ -310,7 +372,7 @@ fun WeeklyBox(day: String,date:String){
     ){
         Text(text="$day\r\n$date", textAlign = TextAlign.Center,modifier = Modifier
             .align(Alignment.Center)
-            .padding(6.dp), color = Color.White)
+            .padding(6.dp), color = White)
 //        Icon(
 //            painterResource(id = R.drawable.ic_weather1),
 //            modifier = Modifier.align(Alignment.Center).size( 10.dp),
@@ -330,7 +392,7 @@ fun PeriodData(period: String,temp:String,feels:String){
         ){
             Text(text ="$period h",textAlign = TextAlign.Center,modifier = Modifier
                 .align(Alignment.Center)
-                .padding(6.dp), color = Color.White)
+                .padding(6.dp), color = White)
         }
         Box(){
             Text(
