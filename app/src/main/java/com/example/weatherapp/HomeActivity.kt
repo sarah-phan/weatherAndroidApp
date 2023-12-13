@@ -24,7 +24,7 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()) {
                     val sheetState = rememberModalBottomSheetState()
                     //SplashScreen()
-                    HomeScreen()
+                    //HomeScreen()
 //                    ModalBottomSheet(
 //                        sheetState = sheetState,
 //                        onDismissRequest = { /*TODO*/ })
