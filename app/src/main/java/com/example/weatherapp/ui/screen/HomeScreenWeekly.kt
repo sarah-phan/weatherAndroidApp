@@ -71,13 +71,11 @@ fun BSheet(weeklyResult: WeekResult){
         ,"Snow probability","Ice probability","Wind direction","Wind gust","Wind speed")
     Column(
         verticalArrangement = Arrangement.Center,
-
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = LightColorPalette.secondary)
+//            .background(color = LightColorPalette.secondary)
             .verticalScroll(rememberScrollState())
     ){
-
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier

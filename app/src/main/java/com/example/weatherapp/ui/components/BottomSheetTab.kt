@@ -16,12 +16,13 @@ import com.example.weatherapp.R
 import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.model.WeekResult
 import com.example.weatherapp.ui.theme.LightColorPalette
+import com.example.weatherapp.ui.theme.bottomSheetShape
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun Scaffold(weatherResult: WeatherResult, weeklyResult: WeekResult, sheetContentChosen: @Composable () -> Unit){
     BottomSheetScaffold(
-        sheetContainerColor = LightColorPalette.secondary,
+        sheetContainerColor = LightColorPalette.surfaceVariant,
         sheetContent = {
             sheetContentChosen()
         },
@@ -30,10 +31,15 @@ fun Scaffold(weatherResult: WeatherResult, weeklyResult: WeekResult, sheetConten
         sheetDragHandle = {
             Surface(modifier= Modifier.fillMaxWidth(), color = LightColorPalette.secondary) {
             }
-        }
+        },
+        sheetShape = bottomSheetShape
     ) {
         Image(
-            painterResource(id = R.drawable.bg_light), contentDescription ="",
-            modifier = Modifier.fillMaxHeight(), contentScale = ContentScale.Crop)
+            painterResource(id = R.drawable.bg_light),
+            contentDescription ="",
+            modifier = Modifier.fillMaxHeight(),
+            contentScale = ContentScale.Crop,
+            alpha = 0.25f
+            )
     }
 }
