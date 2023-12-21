@@ -6,7 +6,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-val DarkColorPalette = darkColorScheme(
+private val DarkColorPalette = darkColorScheme(
     primary = theme_dark_primary,
     onPrimary = theme_dark_onPrimary,
     primaryContainer = theme_dark_primaryContainer,
@@ -22,10 +22,12 @@ val DarkColorPalette = darkColorScheme(
     surface = theme_dark_surface,
     onSurface = theme_dark_onSurface,
     error = theme_dark_error,
-    onError = theme_dark_onError
+    onError = theme_dark_onError,
+    surfaceVariant = theme_dark_surfaceContainer,
+    onSurfaceVariant = theme_dark_onSurfaceContainer
 )
 
-val LightColorPalette = lightColorScheme(
+private val LightColorPalette = lightColorScheme(
     primary = theme_light_primary,
     onPrimary = theme_light_onPrimary,
     primaryContainer = theme_light_primaryContainer,
@@ -42,6 +44,8 @@ val LightColorPalette = lightColorScheme(
     onSurface = theme_light_onSurface,
     error = theme_light_error,
     onError = theme_light_onError,
+    surfaceVariant = theme_light_surfaceContainer,
+    onSurfaceVariant = theme_light_onSurfaceContainer
 )
 
 @Composable
