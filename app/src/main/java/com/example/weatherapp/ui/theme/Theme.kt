@@ -22,7 +22,9 @@ private val DarkColorPalette = darkColorScheme(
     surface = theme_dark_surface,
     onSurface = theme_dark_onSurface,
     error = theme_dark_error,
-    onError = theme_dark_onError
+    onError = theme_dark_onError,
+    surfaceVariant = theme_dark_surfaceContainer,
+    onSurfaceVariant = theme_dark_onSurfaceContainer
 )
 
 private val LightColorPalette = lightColorScheme(
@@ -41,7 +43,9 @@ private val LightColorPalette = lightColorScheme(
     surface = theme_light_surface,
     onSurface = theme_light_onSurface,
     error = theme_light_error,
-    onError = theme_light_onError
+    onError = theme_light_onError,
+    surfaceVariant = theme_light_surfaceContainer,
+    onSurfaceVariant = theme_light_onSurfaceContainer
 )
 
 @Composable
