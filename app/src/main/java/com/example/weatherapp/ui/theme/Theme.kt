@@ -41,7 +41,7 @@ val LightColorPalette = lightColorScheme(
     surface = theme_light_surface,
     onSurface = theme_light_onSurface,
     error = theme_light_error,
-    onError = theme_light_onError
+    onError = theme_light_onError,
 )
 
 @Composable
