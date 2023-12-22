@@ -73,7 +73,7 @@ fun HomeScreen(weatherResult: WeatherResult, weeklyResult: WeekResult){
 @Composable
 fun Scaffold(weatherResult: WeatherResult,weeklyResult:WeekResult){
     BottomSheetScaffold(
-        sheetContainerColor = LightColorPalette.secondary,
+        sheetContainerColor = LightColorPalette.surfaceVariant,
         sheetContent = {
             BSheet(weeklyResult)
         },
@@ -103,7 +103,7 @@ fun BSheet(weeklyResult: WeekResult){
 
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = LightColorPalette.secondary)
+            .background(color = LightColorPalette.surfaceVariant)
             .verticalScroll(rememberScrollState())
     ){
 
@@ -184,9 +184,6 @@ fun BSheet(weeklyResult: WeekResult){
                         .fillMaxWidth()
                         .padding(20.dp)
                         .border(BorderStroke(2.dp, Color.Gray), shape = RoundedCornerShape(20.dp)),
-                    colors = CardDefaults.cardColors(
-                        containerColor = LightColorPalette.secondary
-                    )
                 ) {
                     Text(
                         text = "Details",
@@ -249,7 +246,7 @@ fun BSheet(weeklyResult: WeekResult){
                                 Text(modifier = Modifier.padding(horizontal = 15.dp),
                                     color = LightColorPalette.onSurface,
                                     text= string,
-                                    textAlign = TextAlign.Start,
+                                    textAlign = TextAlign.End,
                                     fontWeight = FontWeight.Bold
                                 )
                             }
@@ -307,7 +304,7 @@ fun PeriodData(period: String,infor: List2){
         }
         Box(){
             Text(
-                textAlign = TextAlign.Center,
+                textAlign = TextAlign.Left,
                 modifier = Modifier
                     .align(Alignment.Center)
                     .padding(horizontal = 50.dp, vertical = 6.dp),
