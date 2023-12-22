@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -79,10 +80,10 @@ fun Scaffold(weatherResult: WeatherResult,weeklyResult:WeekResult){
         },
         scaffoldState = rememberBottomSheetScaffoldState(),
         sheetPeekHeight = 250.dp,
-        sheetDragHandle = {
-                          Surface(modifier=Modifier.fillMaxWidth(), color = LightColorPalette.secondary) {
-                          }
-        },
+//        sheetDragHandle = {
+//                          Surface(modifier=Modifier.fillMaxWidth(), color = LightColorPalette.secondary) {
+//                          }
+//        },
 //        topBar = {
 //            //TopBar()
 //            Text(text = "${weeklyResult.city.coord?.lat}/${weeklyResult.city.coord?.lon}")
@@ -198,14 +199,15 @@ fun BSheet(weeklyResult: WeekResult){
                         .padding(horizontal = 20.dp, vertical = 5.dp)
                         .height(380.dp), ){
                         itemsIndexed(items = details){index,item->
-                            Row(modifier = Modifier.padding(vertical = 5.dp)){
+                            Row(modifier = Modifier.padding(vertical = 5.dp),
+                            //    horizontalArrangement = Arrangement.SpaceBetween
+                            ){
                                 Text(modifier = Modifier.width(200.dp),
                                     color = LightColorPalette.onSurface,
                                     text= item,
                                     textAlign = TextAlign.Start
                                 )
                                 var string = ""
-                                val details2 = listOf("Max Temperature","Min Temperature","Rain","Humidity","Visibility","Cloud","Snow probability","Ice probability","Wind direction","Wind gust","Wind speed")
 
                                 var selectedData = listForecast[selectedIndex]
                                 when(index){
@@ -243,11 +245,11 @@ fun BSheet(weeklyResult: WeekResult){
                                         string = "${selectedData.speed} km/h"
 
                                 }
-                                Text(modifier = Modifier.padding(horizontal = 15.dp),
-                                    color = LightColorPalette.onSurface,
+                                Spacer(modifier = Modifier.weight(1f))
+                                Text(color = LightColorPalette.onSurface,
                                     text= string,
                                     textAlign = TextAlign.End,
-                                    fontWeight = FontWeight.Bold
+                                    fontWeight = FontWeight.Bold,
                                 )
                             }
                         }
