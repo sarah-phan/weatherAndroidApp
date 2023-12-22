@@ -10,8 +10,4 @@ val Shapes = Shapes(
     medium = RoundedCornerShape(35.dp),
 )
 
-//delete
-val bottomShape = Shapes(medium = RoundedCornerShape(topStart = 60.dp, topEnd = 60.dp))
-val searchShape = Shapes(medium = RoundedCornerShape(12.dp))
-
-val bottomSheetShape = Shapes(large = RoundedCornerShape(topStart = 50.dp, topEnd = 50.dp))
+val bottomSheetShape = RoundedCornerShape(topStart = 50.dp, topEnd = 50.dp)

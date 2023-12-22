@@ -1,7 +1,6 @@
 package com.example.weatherapp.ui.screen
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -22,35 +21,28 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -59,38 +51,18 @@ import com.example.weatherapp.R
 import com.example.weatherapp.model.List2
 import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.model.WeekResult
+import com.example.weatherapp.ui.components.Scaffold
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.utils.Utils.Companion.timestampToHumanDate
 import kotlin.math.roundToInt
 
 @Composable
-fun HomeScreen(weatherResult: WeatherResult, weeklyResult: WeekResult){
-
-    Scaffold(weatherResult,weeklyResult)
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Scaffold(weatherResult: WeatherResult,weeklyResult:WeekResult){
-    BottomSheetScaffold(
-        sheetContainerColor = LightColorPalette.surfaceVariant,
-        sheetContent = {
-            BSheet(weeklyResult)
-        },
-        scaffoldState = rememberBottomSheetScaffoldState(),
-        sheetPeekHeight = 250.dp,
-//        sheetDragHandle = {
-//                          Surface(modifier=Modifier.fillMaxWidth(), color = LightColorPalette.secondary) {
-//                          }
-//        },
-//        topBar = {
-//            //TopBar()
-//            Text(text = "${weeklyResult.city.coord?.lat}/${weeklyResult.city.coord?.lon}")
-//        }
-    ) {
-        Image(painterResource(id = R.drawable.bg_light), contentDescription ="",
-            modifier = Modifier.fillMaxHeight(), contentScale = ContentScale.Crop)
+fun HomeScreenWeekly(weatherResult: WeatherResult, weeklyResult: WeekResult){
+    Scaffold(
+        weatherResult = weatherResult,
+        weeklyResult = weeklyResult
+        ){
+        BSheet(weeklyResult = weeklyResult)
     }
 }
 
@@ -101,13 +73,11 @@ fun BSheet(weeklyResult: WeekResult){
         ,"Snow probability","Ice probability","Wind direction","Wind gust","Wind speed")
     Column(
         verticalArrangement = Arrangement.Center,
-
         modifier = Modifier
             .fillMaxWidth()
             .background(color = LightColorPalette.surfaceVariant)
             .verticalScroll(rememberScrollState())
     ){
-
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
@@ -158,10 +128,10 @@ fun BSheet(weeklyResult: WeekResult){
                                     shape = RoundedCornerShape(50.dp)
                                 )
                                 .selectable(
-                                    selected = item.dt==selectedIndex,
+                                    selected = item.dt == selectedIndex,
                                     onClick = {
-                                        if(selectedIndex != index)
-                                            selectedIndex  = index
+                                        if (selectedIndex != index)
+                                            selectedIndex = index
                                     }
                                 )
                         ){
