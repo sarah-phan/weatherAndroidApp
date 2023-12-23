@@ -39,3 +39,5 @@ val theme_dark_surfaceContainer = Color(0xFF4E514D)
 val theme_dark_onSurfaceContainer = Color(0xFFF0FFEB)
 val theme_dark_error = Color(0xFFF2B8B5)
 val theme_dark_onError = Color(0xFF601410)
+
+val lineColor = Color(0xFF3E6365).copy(alpha = 0.35f)

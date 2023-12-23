@@ -10,7 +10,6 @@ import com.example.weatherapp.api.RetrofitClient
 import com.example.weatherapp.model.Coord
 import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.model.WeekResult
-import com.example.weatherapp.model.WeeklyResult
 import kotlinx.coroutines.launch
 
 enum class STATE{

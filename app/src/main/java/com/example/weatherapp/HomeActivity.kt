@@ -19,7 +19,6 @@ class HomeActivity : ComponentActivity() {
                 Surface(
                     color = theme_light_primary,
                     modifier = Modifier.fillMaxSize()) {
-//                    val sheetState = rememberModalBottomSheetState()
                 }
             }
         }

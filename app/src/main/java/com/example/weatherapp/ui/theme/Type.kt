@@ -8,19 +8,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.weatherapp.R
 
-// delete
-val ReemKufi = FontFamily(Font(R.font.reemkufi))
-val Poppins = FontFamily(Font(R.font.poppins))
-
 val Manjari = FontFamily(
     Font(R.font.manjari_regular, FontWeight.Normal),
     Font(R.font.manjari_bold, FontWeight.Bold)
 )
 val Typography = Typography(
-    bodySmall = TextStyle(
+    bodyMedium = TextStyle(
         fontFamily = Manjari,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
+        fontSize = 16.sp
     ),
     titleSmall = TextStyle(
         fontFamily = Manjari,

@@ -59,7 +59,8 @@ fun WeatherAppTheme(darktheme: Boolean= isSystemInDarkTheme(),content: @Composab
     }
 
     MaterialTheme(
-        colorScheme = colors,
+        colorScheme = LightColorPalette,
+//        colorScheme = colors,
         typography = Typography,
         shapes = Shapes,
         content = content
