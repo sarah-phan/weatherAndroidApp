@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
@@ -142,6 +143,8 @@ fun BSheet(weeklyResult: WeekResult) {
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     itemsIndexed(listForecast) { index, item ->
+                        val weatherIcon = item.weather?.firstOrNull()?.icon
+                        val weatherMainInformation = item.weather?.firstOrNull()?.main
                         var day = ""
                         var time = ""
                         item.dt.let { dateTime ->
@@ -176,12 +179,14 @@ fun BSheet(weeklyResult: WeekResult) {
                                 color = LightColorPalette.onPrimaryContainer,
                                 style = MaterialTheme.typography.bodyMedium
                             )
-                            val weatherIcon = item.weather?.firstOrNull()?.icon
-                            val weatherMainInformation = item.weather?.firstOrNull()?.main
                             if (weatherIcon != null) {
                                 AsyncImage(
                                     model = "https://openweathermap.org/img/wn/${weatherIcon}@2x.png",
-                                    contentDescription = weatherMainInformation
+                                    contentDescription = weatherMainInformation,
+                                    modifier = Modifier
+                                        .padding(top = 65.dp)
+                                        .size(50.dp),
+                                    alignment = Alignment.Center
                                 )
                             }
                         }

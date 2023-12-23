@@ -21,6 +21,7 @@ interface IApiService {
         @Query ("lat") lat:Double = 0.0,
         @Query ("lon") lon:Double = 0.0,
         @Query ("units") units:String = "metric",
+        @Query ("cnt") cnt:Int = 16,
         @Query ("appid") appId:String = APIKey
     ): WeekResult
 
