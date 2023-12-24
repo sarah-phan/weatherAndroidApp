@@ -26,7 +26,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
-import com.example.weatherapp.model.List2
+import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeekResult
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
@@ -35,7 +35,7 @@ import com.example.weatherapp.ui.theme.lineColor
 @Composable
 fun BSheetOptions(
     weeklyResult: WeekResult,
-    sheetContent: @Composable (List2) -> Unit,
+    hourlyResult: HourlyResult,
 ) {
     var optionButtonsChosen by remember { mutableStateOf(0) }
     Column(
@@ -83,11 +83,12 @@ fun BSheetOptions(
             thickness = 1.dp,
             modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_small))
         )
-        if (optionButtonsChosen == 1) {
-            weeklyTabList(weeklyResult = weeklyResult, sheetContent = sheetContent)
+
+        if(optionButtonsChosen == 1){
+            TabList(resultData = weeklyResult)
         }
-        if (optionButtonsChosen == 0) {
-            hourlyTabList()
+        else if (optionButtonsChosen == 0){
+            TabList(resultData = hourlyResult)
         }
     }
 }

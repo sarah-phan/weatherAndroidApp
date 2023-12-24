@@ -1,15 +1,14 @@
 package com.example.weatherapp.model
 
-import android.opengl.Visibility
 import com.google.gson.annotations.SerializedName
 
-data class WeeklyResult(
-    @SerializedName("cod") var cod: String? = null,
-    @SerializedName("message") var message: Double? = 0.0,
-    @SerializedName("cnt") var cnt: Int? = 0,
-    @SerializedName("list") var list: ArrayList<List> = arrayListOf(),
-    @SerializedName("city") var city: CityModel = CityModel()
-)
+//data class WeeklyResult(
+//    @SerializedName("cod") var cod: String? = null,
+//    @SerializedName("message") var message: Double? = 0.0,
+//    @SerializedName("cnt") var cnt: Int? = 0,
+//    @SerializedName("list") var list: ArrayList<List> = arrayListOf(),
+//    @SerializedName("city") var city: CityModel = CityModel()
+//)
 
 data class WeekResult(
     @SerializedName("cod") var cod: String? = null,
@@ -37,7 +36,7 @@ data class List2 (
     @SerializedName("visibility") var visibility: Double? = 0.0,
     @SerializedName("pop") var pop: Double? = 0.0,
     @SerializedName("rain") var rain: Double? = 0.0,
-)
+): ResultList
 
 data class CityModel(
     @SerializedName("id") var id: Int? = 0,

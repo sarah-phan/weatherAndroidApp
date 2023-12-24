@@ -32,26 +32,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
 import com.example.weatherapp.model.List2
-import com.example.weatherapp.model.WeekResult
-import com.example.weatherapp.ui.components.Scaffold
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.ui.theme.lineColor
 import kotlin.math.roundToInt
 
 @Composable
-fun HomeScreenWeekly(weeklyResult: WeekResult) {
-    Scaffold(
-        peekHeight = 300.dp,
-        weeklyResult = weeklyResult,
-        sheetContent = {selectedWeekResult: List2 ->
-            BSheetWeeklyContent(selectedWeekResult)
-        }
-    )
-}
-
-@Composable
-fun BSheetWeeklyContent(selectedWeekResult: List2) {
+fun HomeScreenWeekly(weeklyDetailSelected: List2) {
     val periods = listOf("6", "12", "18", "24")
     val details = listOf(
         "Max Temperature",
@@ -76,7 +63,7 @@ fun BSheetWeeklyContent(selectedWeekResult: List2) {
         userScrollEnabled = false
     ) {
         items(items = periods) { item ->
-            PeriodData(period = item, selectedWeekResult)
+            PeriodData(period = item, infor = weeklyDetailSelected)
         }
     }
     Card(
@@ -118,7 +105,7 @@ fun BSheetWeeklyContent(selectedWeekResult: List2) {
                     )
                     var string = ""
 
-                    var selectedData = selectedWeekResult
+                    var selectedData = weeklyDetailSelected
                     when (index) {
                         0 -> string = "${selectedData.temp?.max?.roundToInt()}°"
 
