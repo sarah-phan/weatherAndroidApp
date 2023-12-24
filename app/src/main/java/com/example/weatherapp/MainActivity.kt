@@ -138,7 +138,7 @@ class MainActivity : ComponentActivity() {
                             ErrorScreen(mainViewModel.errorMsg,currentLocation)
                         }
                         STATE.SUCCESS -> {
-                            HomeScreenWeekly(mainViewModel.weatherResponse, mainViewModel.weeklyResponse)
+                            HomeScreenWeekly(mainViewModel.weeklyResponse)
                         }
                     }
                 }

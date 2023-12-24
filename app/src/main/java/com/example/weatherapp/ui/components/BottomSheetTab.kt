@@ -11,16 +11,25 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import com.example.weatherapp.R
+import com.example.weatherapp.model.List2
+import com.example.weatherapp.model.WeekResult
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.bottomSheetShape
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun Scaffold(peekHeight: Dp, sheetContentChosen: @Composable () -> Unit) {
+fun Scaffold(
+    peekHeight: Dp,
+    weeklyResult: WeekResult,
+    sheetContent: @Composable (List2) -> Unit,
+) {
     BottomSheetScaffold(
         sheetContainerColor = LightColorPalette.surfaceVariant,
         sheetContent = {
-            sheetContentChosen()
+            BSheetOptions(
+                weeklyResult = weeklyResult,
+                sheetContent = sheetContent
+            )
         },
         scaffoldState = rememberBottomSheetScaffoldState(),
         sheetPeekHeight = peekHeight,
