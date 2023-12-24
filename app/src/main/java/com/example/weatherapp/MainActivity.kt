@@ -29,7 +29,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.data.Key.Companion.permissions
 import com.example.weatherapp.model.Coord
-import com.example.weatherapp.ui.screen.HomeScreenWeekly
+import com.example.weatherapp.ui.screen.HomeScreen
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 import com.example.weatherapp.ui.theme.theme_light_primary
 import com.example.weatherapp.viewmodel.MainViewModel
@@ -138,7 +138,9 @@ class MainActivity : ComponentActivity() {
                             ErrorScreen(mainViewModel.errorMsg,currentLocation)
                         }
                         STATE.SUCCESS -> {
-                            HomeScreenWeekly(mainViewModel.weeklyResponse)
+//                            HomeScreenWeekly(mainViewModel.weeklyResponse)
+//                            HomeScreenHourly(mainViewModel.hourlyResponse)
+                            HomeScreen(mainViewModel.weeklyResponse, mainViewModel.hourlyResponse)
                         }
                     }
                 }
@@ -155,10 +157,10 @@ class MainActivity : ComponentActivity() {
     }
     private fun fetchWeatherData(mainViewModel: MainViewModel,currentLocation:Coord){
         mainViewModel.state = STATE.LOADING
-        mainViewModel.getWeatherResponse(currentLocation)
+//        mainViewModel.getWeatherResponse(currentLocation)
         mainViewModel.getWeeklyResponse(currentLocation)
+        mainViewModel.getHourlyResponse(currentLocation)
         mainViewModel.state = STATE.SUCCESS
-
     }
 }
 
