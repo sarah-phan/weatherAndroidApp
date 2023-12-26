@@ -30,7 +30,7 @@ interface IApiService {
         @Query ("lon") lon:Double = 0.0,
         @Query ("units") units:String = "metric",
         @Query ("appid") appId:String = APIKey
-    ):HourlyResult
+    ): HourlyResult
 
 //    @GET("forecast")
 //    suspend fun getWeekly2(

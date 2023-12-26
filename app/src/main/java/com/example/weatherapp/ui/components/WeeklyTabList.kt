@@ -3,10 +3,12 @@ package com.example.weatherapp.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -17,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -53,8 +56,8 @@ fun WeeklyTabList(
             }
             Box(
                 modifier = Modifier
-                    .height(120.dp)
-                    .width(50.dp)
+                    .height(140.dp)
+                    .width(60.dp)
                     .background(
                         color = if (index == selectedIndex.value) LightColorPalette.primary else LightColorPalette.primaryContainer,
                         shape = Shapes.large
@@ -63,37 +66,34 @@ fun WeeklyTabList(
                         if (selectedIndex.value != index) selectedIndex.value = index
                     })
             ) {
-                Text(
-                    text = "${day.uppercase()}",
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .padding(
-                            bottom = 40.dp
-                        )
-                        .align(Alignment.Center),
-                    color = LightColorPalette.onPrimaryContainer,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-                Text(
-                    text = "$time",
-                    modifier = Modifier.align(Alignment.Center),
-                    color = LightColorPalette.onPrimaryContainer,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-                if (weatherIcon != null) {
-                    AsyncImage(
-                        model = "https://openweathermap.org/img/wn/${weatherIcon}@2x.png",
-                        contentDescription = weatherMainInformation,
-                        modifier = Modifier
-                            .padding(top = 65.dp)
-                            .size(50.dp),
-                        alignment = Alignment.Center
+                        .fillMaxSize()
+                        .padding(top = dimensionResource(id = R.dimen.padding_small))
+                ) {
+                    Text(
+                        text = "${day.uppercase()}",
+                        color = LightColorPalette.onPrimaryContainer,
+                        style = MaterialTheme.typography.titleSmall,
                     )
+                    Text(
+                        text = "${time}",
+                        color = LightColorPalette.onPrimaryContainer,
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                    if (weatherIcon != null) {
+                        AsyncImage(
+                            model = "https://openweathermap.org/img/wn/${weatherIcon}@2x.png",
+                            contentDescription = weatherMainInformation,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .aspectRatio(1.6f)
+                                .scale(1.7f)
+                        )
+                    }
                 }
             }
         }
     }
 }
-//        val selectedWeekResult = listForecast.getOrNull(selectedIndex)
-//        selectedWeekResult?.let {
-//            sheetContent(it)
-//        }

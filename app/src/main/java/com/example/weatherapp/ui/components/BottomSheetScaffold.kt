@@ -34,7 +34,7 @@ fun BottomSheetScaffold(
                 )
             },
             scaffoldState = rememberBottomSheetScaffoldState(),
-            sheetPeekHeight = 300.dp,
+            sheetPeekHeight = 320.dp,
             sheetShape = bottomSheetShape
         ) {
             Image(
