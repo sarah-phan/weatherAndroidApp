@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -41,17 +42,19 @@ import kotlin.math.roundToInt
 fun HomeScreenWeekly(weeklyDetailSelected: List2) {
     val periods = listOf("6", "12", "18", "24")
     val details = listOf(
-        "Max Temperature",
-        "Min Temperature",
-        "Rain",
-        "Humidity",
-        "Visibility",
-        "Cloud",
-        "Snow probability",
-        "Ice probability",
-        "Wind direction",
-        "Wind gust",
-        "Wind speed"
+        R.string.main_condition,
+        R.string.condition_description,
+        R.string.max_temperature,
+        R.string.min_temperature,
+        R.string.rain,
+        R.string.humidity,
+        R.string.visibility,
+        R.string.cloud,
+        R.string.snow,
+        R.string.ice,
+        R.string.wind_direction,
+        R.string.wind_gust,
+        R.string.wind_speed
     )
     LazyColumn(
         modifier = Modifier
@@ -99,7 +102,7 @@ fun HomeScreenWeekly(weeklyDetailSelected: List2) {
                     Text(
                         modifier = Modifier.width(200.dp),
                         color = LightColorPalette.onSurface,
-                        text = item,
+                        text = stringResource(id = item),
                         textAlign = TextAlign.Start,
                         style = MaterialTheme.typography.bodyMedium
                     )
@@ -107,29 +110,40 @@ fun HomeScreenWeekly(weeklyDetailSelected: List2) {
 
                     var selectedData = weeklyDetailSelected
                     when (index) {
-                        0 -> string = "${selectedData.temp?.max?.roundToInt()}°"
 
-                        1 -> string = "${selectedData.temp?.min?.roundToInt()}°"
+                        0 -> string =
+                            "${selectedData.weather?.firstOrNull()?.main?.replaceFirstChar { 
+                                it.uppercase()
+                            }}"
 
-                        2 -> string = "${(selectedData.rain?.roundToInt())}%"
+                        1 -> string =
+                            "${selectedData.weather?.firstOrNull()?.description?.replaceFirstChar { 
+                                it.uppercase() 
+                            }}"
 
-                        3 -> string = "${selectedData.humidity?.roundToInt()}%"
+                        2 -> string = "${selectedData.temp?.max?.roundToInt()}°"
 
-                        4 -> string = "${(selectedData.visibility?.roundToInt())}°"
+                        3 -> string = "${selectedData.temp?.min?.roundToInt()}°"
 
-                        5 -> string = "${(selectedData.clouds)}%"
+                        4 -> string = "${(selectedData.rain?.roundToInt())}%"
 
-                        6 -> string = "${(selectedData.snow)}%"
+                        5 -> string = "${selectedData.humidity?.roundToInt()}%"
 
-                        7 -> string = "${(selectedData.ice)}%"
+                        6 -> string = "${(selectedData.visibility?.roundToInt())}°"
 
-                        8 -> string = "${selectedData.deg?.roundToInt()}°${
+                        7 -> string = "${(selectedData.clouds)}%"
+
+                        8 -> string = "${(selectedData.snow)}%"
+
+                        9 -> string = "${(selectedData.ice)}%"
+
+                        10 -> string = "${selectedData.deg?.roundToInt()}°${
                             toDirection(selectedData.deg)
                         }"
 
-                        9 -> string = "${selectedData.gust} km/h"
+                        11 -> string = "${selectedData.gust} km/h"
 
-                        10 -> string = "${selectedData.speed} km/h"
+                        12 -> string = "${selectedData.speed} km/h"
 
                     }
                     Spacer(modifier = Modifier.weight(1f))
@@ -215,7 +229,7 @@ fun PeriodData(period: String, infor: List2) {
                     horizontalArrangement = Arrangement.spacedBy(15.dp)
                 ) {
                     Text(
-                        text = "Temperature",
+                        text = stringResource(id = R.string.temperature),
                         textAlign = TextAlign.Left,
                         color = LightColorPalette.onSurface,
                         style = MaterialTheme.typography.bodyMedium,
@@ -233,7 +247,7 @@ fun PeriodData(period: String, infor: List2) {
                     horizontalArrangement = Arrangement.spacedBy(42.dp)
                 ) {
                     Text(
-                        text = "Feels like",
+                        text = stringResource(id = R.string.feels_like),
                         textAlign = TextAlign.Left,
                         color = LightColorPalette.onSurface,
                         style = MaterialTheme.typography.bodyMedium,

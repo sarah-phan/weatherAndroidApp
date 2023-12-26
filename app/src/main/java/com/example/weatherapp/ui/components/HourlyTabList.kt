@@ -65,8 +65,8 @@ fun HourlyTabList(
             else Utils.timestampToHumanDate(item.dt!!.toLong(), "HH:mm")
             val dateDetail = if (item.dt == null) "00"
             else Utils.timestampToHumanDate(item.dt!!.toLong(), "dd/MM")
-            val weatherIcon = item.weather.icon
-            val weatherMainInformation = item.weather?.main
+            val weatherIcon = item.weather?.firstOrNull()?.icon
+            val weatherMainInformation = item.weather?.firstOrNull()?.main
             var timeShow = hourAndMinuteDetail
 
             if (dateHourDetail == currentDate) {

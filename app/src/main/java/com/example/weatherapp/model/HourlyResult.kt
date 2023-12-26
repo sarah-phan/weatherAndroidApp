@@ -14,7 +14,7 @@ data class HourlyResult(
 data class HourlyList(
     @SerializedName("dt") var dt: Int? = 0,
     @SerializedName("main") var main: MainModel? = MainModel(),
-    @SerializedName("weather") var weather: WeatherModel = WeatherModel(),
+    @SerializedName("weather") var weather: ArrayList<WeatherModel> = arrayListOf(),
     @SerializedName("clouds") var clouds: CLoudModel? = CLoudModel(),
     @SerializedName("wind") var wind: WindModel? = WindModel(),
     @SerializedName("visibility") var visibility: Int? = 0,
