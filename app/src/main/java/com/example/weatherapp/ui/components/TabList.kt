@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeekResult
-import com.example.weatherapp.ui.screen.HomeScreenHourly
+import com.example.weatherapp.ui.screen.HomeScreenHourly.HomeScreenHourly
 import com.example.weatherapp.ui.screen.HomeScreenWeekly
 
 @Composable
