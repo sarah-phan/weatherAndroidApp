@@ -58,7 +58,7 @@ fun BSheetOptions(
                     onClick = {
                         optionButtonsChosen = optionButtonIndex
                     },
-                    shape = Shapes.extraSmall,
+                    shape = Shapes.medium,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = if (isOptionButtonsChosen) LightColorPalette.secondary else Color.Transparent,
                     ),
