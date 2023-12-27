@@ -32,7 +32,6 @@ data class List2 (
     @SerializedName("gust") var gust: Double? = 0.0,
     @SerializedName("clouds") var clouds: Int? = 0,
     @SerializedName("snow") var snow: Int? = 0,
-    @SerializedName("ice") var ice: Int? = 0,
     @SerializedName("visibility") var visibility: Double? = 0.0,
     @SerializedName("pop") var pop: Double? = 0.0,
     @SerializedName("rain") var rain: Double? = 0.0,

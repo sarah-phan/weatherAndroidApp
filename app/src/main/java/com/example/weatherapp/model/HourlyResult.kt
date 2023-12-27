@@ -19,10 +19,16 @@ data class HourlyList(
     @SerializedName("wind") var wind: WindModel? = WindModel(),
     @SerializedName("visibility") var visibility: Int? = 0,
     @SerializedName("pop") var pop: Double? = 0.0,
+    @SerializedName("rain") var rain: RainModel? = RainModel(),
+    @SerializedName("snow") var snow: SnowModel? = SnowModel(),
     @SerializedName("sys") var sys: HourlySysModel? = HourlySysModel(),
     @SerializedName("dt_txt") var dtTxt: String? = null,
 ) : ResultList
 
 data class HourlySysModel(
     @SerializedName("pod") var pod: String? = null,
+)
+
+data class RainModel(
+    @SerializedName("1h") var d1h: Double? = 0.0
 )

@@ -33,6 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
 import com.example.weatherapp.model.List2
+import com.example.weatherapp.ui.components.WindDirection
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.ui.theme.lineColor
@@ -51,7 +52,6 @@ fun HomeScreenWeekly(weeklyDetailSelected: List2) {
         R.string.visibility,
         R.string.cloud,
         R.string.snow,
-        R.string.ice,
         R.string.wind_direction,
         R.string.wind_gust,
         R.string.wind_speed
@@ -125,7 +125,7 @@ fun HomeScreenWeekly(weeklyDetailSelected: List2) {
 
                         3 -> string = "${selectedData.temp?.min?.roundToInt()}°"
 
-                        4 -> string = "${(selectedData.rain?.roundToInt())}%"
+                        4 -> string = "${(selectedData.rain?.roundToInt())}mm"
 
                         5 -> string = "${selectedData.humidity?.roundToInt()}%"
 
@@ -135,15 +135,13 @@ fun HomeScreenWeekly(weeklyDetailSelected: List2) {
 
                         8 -> string = "${(selectedData.snow)}%"
 
-                        9 -> string = "${(selectedData.ice)}%"
-
-                        10 -> string = "${selectedData.deg?.roundToInt()}°${
-                            toDirection(selectedData.deg)
+                        9 -> string = "${selectedData.deg?.roundToInt()}°${
+                            WindDirection(selectedData.deg)
                         }"
 
-                        11 -> string = "${selectedData.gust} km/h"
+                        10 -> string = "${selectedData.gust} km/h"
 
-                        12 -> string = "${selectedData.speed} km/h"
+                        11 -> string = "${selectedData.speed} km/h"
 
                     }
                     Spacer(modifier = Modifier.weight(1f))
@@ -273,30 +271,4 @@ fun TopBar() {
             Icon(painterResource(id = R.drawable.ic_search), contentDescription = "")
         }
     }
-}
-
-fun toDirection(degree: Double?): String {
-    val directions = arrayListOf(
-        "N",
-        "NNE",
-        "NE",
-        "ENE",
-        "E",
-        "ESE",
-        "SE",
-        "SSE",
-        "S",
-        "SSW",
-        "SW",
-        "WSW",
-        "W",
-        "WNW",
-        "NW",
-        "NNW",
-        "N"
-    )
-    if (degree != null) {
-        return directions[(degree.div(22.5).toInt())]
-    }
-    return ""
 }

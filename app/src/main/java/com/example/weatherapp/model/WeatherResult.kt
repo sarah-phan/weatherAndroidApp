@@ -57,5 +57,5 @@ data class SysModel(
 )
 
 data class SnowModel(
-    @SerializedName("1h") var d1h: Double? = null,
+    @SerializedName("1h") var d1h: Double? = 0.0,
 )

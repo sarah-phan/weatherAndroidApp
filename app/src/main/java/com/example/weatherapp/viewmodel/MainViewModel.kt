@@ -44,9 +44,10 @@ class MainViewModel: ViewModel() {
     fun getWeeklyResponse(coord: Coord){
         viewModelScope.launch{
             state = STATE.LOADING
-            val apiService = RetrofitClient.getInstance()
+            val apiService = RetrofitClient.getInstanceMain()
             try{
                 val apiResponse = apiService.getWeekly(coord.lat,coord.lon)
+                Log.d("apiResponse",apiResponse.toString())
                 weeklyResponse = apiResponse
                 state = STATE.SUCCESS
             }
@@ -60,7 +61,7 @@ class MainViewModel: ViewModel() {
     fun getHourlyResponse(coord: Coord){
          viewModelScope.launch {
              state = STATE.LOADING
-             val apiService = RetrofitClient.getInstance()
+             val apiService = RetrofitClient.getInstanceMain()
              try {
                  val apiResponse = apiService.getHourly(coord.lat, coord.lon)
                  hourlyResponse = apiResponse

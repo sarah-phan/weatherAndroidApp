@@ -20,29 +20,49 @@ fun HomeScreenHourly(
     hourlyDetailSelected: HourlyList,
     hourlyResultData: HourlyResult,
 ) {
-    val titleSections = listOf(
-        "Air Quality", "Sunrise", "Sunset", "Temperature", "Atmospheric moisture", "Wind", "Other"
-    )
-    val subTitleSections = listOf(
-
+    val subTitleTemp = listOf(
         R.string.feels_like,
         R.string.max,
-        R.string.min,
-        R.string.rain,
-        R.string.humidity,
-        R.string.cloud,
-        R.string.direction,
-        R.string.gust,
-        R.string.speed,
-        R.string.visibility,
-        R.string.snow,
-        R.string.ice
+        R.string.min
     )
-    val mainData = hourlyDetailSelected.main
-    val tempDetail = mainData?.temp
+    val subTitleConditionDetail = listOf(
+        R.string.temperature,
+        R.string.main_condition,
+        R.string.condition_description,
+    )
+    val contentTempDetail: ArrayList<String> = arrayListOf()
+    val contentConditionDetail: ArrayList<String> = arrayListOf()
+
+
+    hourlyDetailSelected.main.let {
+        contentTempDetail.add(it?.feels_like.toString())
+        contentTempDetail.add(it?.temp_max.toString())
+        contentTempDetail.add(it?.temp_min.toString())
+
+        contentConditionDetail.add(it?.temp.toString())
+    }
+
+    hourlyDetailSelected.weather.forEach { conditionItem ->
+        contentConditionDetail.add(conditionItem.main ?: "")
+        contentConditionDetail.add(conditionItem.description ?: "")
+    }
 
     Column {
-        ConditionDetail(hourlyDetailSelected = hourlyDetailSelected)
+        //Condition
+        DataUiSame(
+            title = "Condition",
+            subTitle = subTitleConditionDetail,
+            content = contentConditionDetail,
+            boxWidth = 1f
+        )
+
+        //Temperature
+        DataUiSame(
+            title = "Temperature",
+            subTitle = subTitleTemp,
+            content = contentTempDetail,
+            boxWidth = 0.5f
+        )
     }
 }
 
@@ -55,7 +75,6 @@ fun HomeScreenHourlyPreview() {
     val weather2 = WeatherModel(
         id = 804, main = "Clouds", description = "overcast clouds", icon = "04d"
     )
-    // Create a list of WeatherModel objects
     val weatherList = ArrayList(listOf(weather1, weather2))
 
     val HourlyList1 = HourlyList(
@@ -125,7 +144,8 @@ fun HomeScreenHourlyPreview() {
             pop = 0.0,
             sys = HourlySysModel(pod = "n"),
             dtTxt = "2023-12-26 08:00:00"
-        ), hourlyResultData = HourlyResult(
+        ),
+        hourlyResultData = HourlyResult(
             cod = "200", message = 0.0, cnt = 96, list = hourlyListArray, city = CityModel(
                 id = 5375480,
                 name = "Mountain View",

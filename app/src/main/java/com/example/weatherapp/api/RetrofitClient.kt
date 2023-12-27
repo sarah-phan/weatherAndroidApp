@@ -5,16 +5,27 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitClient {
     companion object{
-        private var apiService: IApiService? = null
-        fun getInstance(): IApiService{
-            if(apiService == null){
-                apiService = Retrofit.Builder()
+        private var apiServiceMain: IApiService? = null
+        private var apiServiceBackup: IApiService? = null
+        fun getInstanceMain(): IApiService{
+            if(apiServiceMain == null){
+                apiServiceMain = Retrofit.Builder()
                     .baseUrl("https://pro.openweathermap.org/data/2.5/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(IApiService::class.java)
             }
-            return apiService!!
+            return apiServiceMain!!
+        }
+        fun getInstanceBackup(): IApiService{
+            if(apiServiceBackup == null){
+                apiServiceBackup = Retrofit.Builder()
+                    .baseUrl("https://api.openweathermap.org/data/2.5/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(IApiService::class.java)
+            }
+            return apiServiceBackup!!
         }
     }
 }

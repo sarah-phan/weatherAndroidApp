@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.components
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,6 +28,7 @@ fun TabList(resultData: Any) {
             }
         }
     } else if (resultData is WeekResult) {
+        Log.d("resultData", resultData.toString())
         resultData.list.let { listForecast ->
             if (listForecast.size > 0) {
                 WeeklyTabList(
