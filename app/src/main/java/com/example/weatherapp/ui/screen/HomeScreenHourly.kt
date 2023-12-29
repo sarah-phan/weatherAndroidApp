@@ -18,7 +18,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.model.AirPollutionList
 import com.example.weatherapp.model.HourlyList
 import com.example.weatherapp.model.HourlyResult
-import com.example.weatherapp.ui.components.HourlyDataUiBox
+import com.example.weatherapp.ui.components.DataUiBox
 import com.example.weatherapp.ui.components.SunriseSunsetUiBox
 import com.example.weatherapp.ui.components.WindDirection
 import com.example.weatherapp.ui.theme.Shapes
@@ -107,21 +107,21 @@ fun HomeScreenHourly(
         )
     ) {
         //Condition
-        HourlyDataUiBox(
+        DataUiBox(
             title = "Condition",
             subTitle = subTitleConditionDetail,
             content = contentConditionDetail,
         )
 
         //Temperature
-        HourlyDataUiBox(
+        DataUiBox(
             title = "Temperature",
             subTitle = subTitleTemp,
             content = contentTempDetail,
         )
 
         //Atmospheric
-        HourlyDataUiBox(
+        DataUiBox(
             title = "Atmospheric Moisture",
             subTitle = subTitleAtmospheric,
             content = contentAtmosphericDetail,
@@ -171,14 +171,14 @@ fun HomeScreenHourly(
 
 
         //Wind
-        HourlyDataUiBox(
+        DataUiBox(
             title = "Wind",
             subTitle = subTitleWind,
             content = contenWindDetail,
         )
 
         //Other
-        HourlyDataUiBox(
+        DataUiBox(
             title = "Other",
             subTitle = subTitleOther,
             content = contentOtherDetail,

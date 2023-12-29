@@ -27,7 +27,7 @@ import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.ui.theme.lineColor
 
 @Composable
-fun HourlyDataUiBox(
+fun DataUiBox(
     title: String,
     subTitle: List<Int>,
     content: List<String>,
