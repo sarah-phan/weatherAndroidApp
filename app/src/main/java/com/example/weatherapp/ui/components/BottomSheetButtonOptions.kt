@@ -32,6 +32,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeekResult
+import com.example.weatherapp.ui.screen.HomeScreenCurrentWeather
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.ui.theme.lineColor
@@ -106,12 +107,14 @@ fun BSheetOptions(
             modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_small))
         )
 
-        if (optionButtonsChosen == 2) {
-            TabList(resultData = weeklyResult)
+        if (optionButtonsChosen == 0) {
+            HomeScreenCurrentWeather()
         } else if (optionButtonsChosen == 1) {
             TabList(
                 resultData = hourlyResult, airPollutionForecastResult = airPollutionForecastResult
             )
+        }else if (optionButtonsChosen == 2){
+            TabList(resultData = weeklyResult)
         }
     }
 }
