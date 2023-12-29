@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeekResult
-import com.example.weatherapp.ui.screen.HomeScreenHourly.HomeScreenHourly
+import com.example.weatherapp.ui.screen.HomeScreenHourly
 import com.example.weatherapp.ui.screen.HomeScreenWeekly
 
 @Composable
@@ -16,19 +16,22 @@ fun TabList(resultData: Any) {
     }
     if (resultData is HourlyResult) {
         resultData.list.let { listForecast ->
+            Log.d("resultData", resultData.toString())
+            Log.d("selectedIndex", selectedIndex.toString())
+
             if (listForecast.size > 0) {
-                HourlyTabList(
+                val hourlyFromCurrent = HourlyTabList(
                     hourlyDataList = listForecast,
-                    selectedIndex = selectedIndex
+                    selectedIndex = selectedIndex,
                 )
                 HomeScreenHourly(
-                    hourlyDetailSelected = listForecast[selectedIndex.value],
+                    hourlyFromCurrentSelected = hourlyFromCurrent[selectedIndex.value],
                     hourlyResultData = resultData
                 )
             }
         }
     } else if (resultData is WeekResult) {
-        Log.d("resultData", resultData.toString())
+//        Log.d("resultData", resultData.toString())
         resultData.list.let { listForecast ->
             if (listForecast.size > 0) {
                 WeeklyTabList(

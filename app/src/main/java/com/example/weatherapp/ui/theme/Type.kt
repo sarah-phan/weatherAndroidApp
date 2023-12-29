@@ -26,6 +26,11 @@ val Typography = Typography(
     displaySmall = TextStyle(
         fontFamily = Manjari,
         fontWeight = FontWeight.Bold,
-        fontSize = 25.sp
+        fontSize = 22.sp
+    ),
+    displayMedium = TextStyle(
+        fontFamily = Manjari,
+        fontWeight = FontWeight.Bold,
+        fontSize = 28.sp
     )
 )

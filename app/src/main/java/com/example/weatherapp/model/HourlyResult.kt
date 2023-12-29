@@ -2,7 +2,6 @@ package com.example.weatherapp.model
 
 import com.google.gson.annotations.SerializedName
 
-interface ResultList
 data class HourlyResult(
     @SerializedName("cod") var cod: String? = null,
     @SerializedName("message") var message: Double? = 0.0,
@@ -23,7 +22,7 @@ data class HourlyList(
     @SerializedName("snow") var snow: SnowModel? = SnowModel(),
     @SerializedName("sys") var sys: HourlySysModel? = HourlySysModel(),
     @SerializedName("dt_txt") var dtTxt: String? = null,
-) : ResultList
+)
 
 data class HourlySysModel(
     @SerializedName("pod") var pod: String? = null,

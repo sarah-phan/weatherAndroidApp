@@ -35,8 +35,8 @@ import java.util.Date
 fun HourlyTabList(
     hourlyDataList: ArrayList<HourlyList>,
     selectedIndex: MutableState<Int>,
-) {
-    var hourlyFromCurrent: ArrayList<HourlyList> = ArrayList()
+): ArrayList<HourlyList>{
+    var hourlyFromCurrent: ArrayList<HourlyList> = arrayListOf()
     val sdf = SimpleDateFormat("dd/MM/yyyy HH")
     val currentDate = sdf.format(Date())
     var shouldAddItems = false
@@ -114,4 +114,5 @@ fun HourlyTabList(
             }
         }
     }
+    return hourlyFromCurrent
 }

@@ -35,7 +35,7 @@ data class List2 (
     @SerializedName("visibility") var visibility: Double? = 0.0,
     @SerializedName("pop") var pop: Double? = 0.0,
     @SerializedName("rain") var rain: Double? = 0.0,
-): ResultList
+)
 
 data class CityModel(
     @SerializedName("id") var id: Int? = 0,

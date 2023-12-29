@@ -1,7 +1,11 @@
-package com.example.weatherapp.ui.screen.HomeScreenHourly
+package com.example.weatherapp.ui.screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.weatherapp.R
 import com.example.weatherapp.model.CLoudModel
@@ -11,13 +15,18 @@ import com.example.weatherapp.model.HourlyList
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.HourlySysModel
 import com.example.weatherapp.model.MainModel
+import com.example.weatherapp.model.RainModel
+import com.example.weatherapp.model.SnowModel
 import com.example.weatherapp.model.WeatherModel
 import com.example.weatherapp.model.WindModel
+import com.example.weatherapp.ui.components.HourlyDataUiBox
+import com.example.weatherapp.ui.components.WindDirection
+import kotlin.math.roundToInt
 
 
 @Composable
 fun HomeScreenHourly(
-    hourlyDetailSelected: HourlyList,
+    hourlyFromCurrentSelected: HourlyList,
     hourlyResultData: HourlyResult,
 ) {
     val subTitleTemp = listOf(
@@ -30,41 +39,98 @@ fun HomeScreenHourly(
         R.string.main_condition,
         R.string.condition_description,
     )
+    val subTitleAtmospheric = listOf(
+        R.string.rain,
+        R.string.humidity,
+        R.string.cloud
+    )
+    val subTitleWind = listOf(
+        R.string.direction,
+        R.string.gust,
+        R.string.speed
+    )
+    val subTitleOther = listOf(
+        R.string.visibility,
+        R.string.snow
+    )
     val contentTempDetail: ArrayList<String> = arrayListOf()
     val contentConditionDetail: ArrayList<String> = arrayListOf()
+    val contentAtmosphericDetail: ArrayList<String> = arrayListOf()
+    val contenWindDetail: ArrayList<String> = arrayListOf()
+    val contentOtherDetail: ArrayList<String> = arrayListOf()
 
+    hourlyFromCurrentSelected.main.let {
+        contentTempDetail.add("${it?.feels_like?.roundToInt()}°")
+        contentTempDetail.add("${it?.temp_max?.roundToInt()}°")
+        contentTempDetail.add("${it?.temp_min?.roundToInt()}°")
 
-    hourlyDetailSelected.main.let {
-        contentTempDetail.add(it?.feels_like.toString())
-        contentTempDetail.add(it?.temp_max.toString())
-        contentTempDetail.add(it?.temp_min.toString())
-
-        contentConditionDetail.add(it?.temp.toString())
+        contentConditionDetail.add("${it?.temp?.roundToInt()}°")
     }
-
-    hourlyDetailSelected.weather.forEach { conditionItem ->
-        contentConditionDetail.add(conditionItem.main ?: "")
-        contentConditionDetail.add(conditionItem.description ?: "")
+    hourlyFromCurrentSelected.weather.forEach {
+        contentConditionDetail.add(it?.main ?: "")
+        contentConditionDetail.add(it?.description ?: "")
     }
+    hourlyFromCurrentSelected.rain.let {
+        contentAtmosphericDetail.add("${it?.d1h?.roundToInt()}mm")
+    }
+    hourlyFromCurrentSelected.main.let {
+        contentAtmosphericDetail.add("${it?.humidity?.roundToInt()}%")
+    }
+    contentAtmosphericDetail.add("${hourlyFromCurrentSelected.clouds?.all}%")
+    hourlyFromCurrentSelected.wind.let {
+        contenWindDetail.add("${it?.deg}°${WindDirection(degree = it?.deg?.toDouble())}")
+        contenWindDetail.add("${it?.gust?.roundToInt()} km/h")
+        contenWindDetail.add("${it?.speed?.roundToInt()} km/h")
+    }
+    contentOtherDetail.add("${hourlyFromCurrentSelected.visibility}m")
+    contentOtherDetail.add("${hourlyFromCurrentSelected.snow?.d1h?.roundToInt()}%")
 
-    Column {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(
+            dimensionResource(id = R.dimen.padding_medium)
+        ),
+        modifier = Modifier.padding(
+            vertical = dimensionResource(id = R.dimen.padding_medium),
+            horizontal = dimensionResource(id = R.dimen.padding_small)
+        )
+    ) {
         //Condition
-        DataUiSame(
+        HourlyDataUiBox(
             title = "Condition",
             subTitle = subTitleConditionDetail,
             content = contentConditionDetail,
-            boxWidth = 1f
         )
 
         //Temperature
-        DataUiSame(
+        HourlyDataUiBox(
             title = "Temperature",
             subTitle = subTitleTemp,
             content = contentTempDetail,
-            boxWidth = 0.5f
+        )
+
+        //Atmospheric
+        HourlyDataUiBox(
+            title = "Atmospheric Moisture",
+            subTitle = subTitleAtmospheric,
+            content = contentAtmosphericDetail,
+        )
+
+        //Wind
+        HourlyDataUiBox(
+            title = "Wind",
+            subTitle = subTitleWind,
+            content = contenWindDetail,
+        )
+
+        //Other
+        HourlyDataUiBox(
+            title = "Other",
+            subTitle = subTitleOther,
+            content = contentOtherDetail,
         )
     }
 }
+
 
 @Preview
 @Composable
@@ -124,26 +190,28 @@ fun HomeScreenHourlyPreview() {
     val hourlyListArray = ArrayList(listOf(HourlyList1, HourlyList2))
 
     HomeScreenHourly(
-        hourlyDetailSelected = HourlyList(
-            dt = 1703577600,
+        hourlyFromCurrentSelected = HourlyList(
+            dt = 1703797200,
             main = MainModel(
-                temp = 9.29,
-                feels_like = 9.29,
-                temp_min = 9.29,
-                temp_max = 10.6,
-                pressure = 1023.0,
-                sea_level = 1023.0,
-                grnd_level = 1022.0,
-                humidity = 87.0,
-                temp_kf = -1.31
+                temp = 24.22,
+                feels_like = 25.02,
+                temp_min = 24.22,
+                temp_max = 24.22,
+                pressure = 1011.0,
+                sea_level = 1011.0,
+                grnd_level = 1010.0,
+                humidity = 89.0,
+                temp_kf = 0.0
             ),
             weather = weatherList,
-            clouds = CLoudModel(all = 0),
-            wind = WindModel(speed = 0.59, deg = 82, gust = 0.78),
+            clouds = CLoudModel(all = 6),
+            wind = WindModel(speed = 0.62, deg = 293, gust = 0.91),
             visibility = 10000,
             pop = 0.0,
+            rain = RainModel(d1h = 0.0),
+            snow = SnowModel(d1h = 0.0),
             sys = HourlySysModel(pod = "n"),
-            dtTxt = "2023-12-26 08:00:00"
+            dtTxt = "2023 - 12 - 28 21:00:00"
         ),
         hourlyResultData = HourlyResult(
             cod = "200", message = 0.0, cnt = 96, list = hourlyListArray, city = CityModel(
