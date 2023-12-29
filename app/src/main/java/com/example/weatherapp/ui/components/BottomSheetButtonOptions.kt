@@ -4,10 +4,12 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -19,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +34,7 @@ import com.example.weatherapp.model.WeekResult
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.ui.theme.lineColor
+import kotlinx.coroutines.launch
 
 @Composable
 fun BSheetOptions(
@@ -38,6 +42,7 @@ fun BSheetOptions(
     hourlyResult: HourlyResult,
 ) {
     var optionButtonsChosen by remember { mutableStateOf(0) }
+
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
@@ -45,30 +50,47 @@ fun BSheetOptions(
             .background(color = LightColorPalette.surfaceVariant)
             .verticalScroll(rememberScrollState())
     ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceEvenly,
+        val lazyListState = rememberLazyListState()
+        val coroutineScope = rememberCoroutineScope()
+        val optionButtons = listOf("Current Weather", "Hourly Forecast", "Weekly Forecast")
+        LazyRow(
+            state = lazyListState,
+            horizontalArrangement = Arrangement.spacedBy(
+                dimensionResource(id = R.dimen.padding_extra_small)
+            ),
+            userScrollEnabled = true,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = dimensionResource(id = R.dimen.padding_small))
+                .padding(
+                    start = dimensionResource(id = R.dimen.padding_small),
+                    bottom = dimensionResource(id = R.dimen.padding_small)
+                )
         ) {
-            val optionButtons = listOf("Hourly Forecast", "Weekly Forecast")
-            for (optionButtonIndex in optionButtons.indices) {
-                val isOptionButtonsChosen = optionButtonsChosen == optionButtonIndex
+            itemsIndexed(optionButtons) { index, item ->
+                val isOptionButtonsChosen = optionButtonsChosen == index
                 Button(
                     onClick = {
-                        optionButtonsChosen = optionButtonIndex
+                        optionButtonsChosen = index
+                        coroutineScope.launch {
+                            when (index) {
+                                0 -> lazyListState.scrollToItem(0) // Scroll to the start for the first button
+                                optionButtons.lastIndex -> lazyListState.scrollToItem(index) // Scroll to the end for the last button
+                            }
+                        }
                     },
                     shape = Shapes.medium,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = if (isOptionButtonsChosen) LightColorPalette.secondary else Color.Transparent,
                     ),
-                    modifier = Modifier.widthIn(max = 150.dp),
+                    modifier = Modifier
+                        .padding(0.dp)
+                        .widthIn(max = 150.dp),
                     border = BorderStroke(
                         width = 1.dp, color = LightColorPalette.secondary
                     )
                 ) {
                     Text(
-                        text = optionButtons[optionButtonIndex],
+                        text = optionButtons[index],
                         color = if (isOptionButtonsChosen) LightColorPalette.onSecondary else LightColorPalette.onSurfaceVariant,
                         style = MaterialTheme.typography.titleSmall,
                         textAlign = TextAlign.Center,
@@ -78,16 +100,16 @@ fun BSheetOptions(
             }
         }
 
+
         Divider(
             color = lineColor,
             thickness = 1.dp,
             modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_small))
         )
 
-        if(optionButtonsChosen == 1){
+        if (optionButtonsChosen == 2) {
             TabList(resultData = weeklyResult)
-        }
-        else if (optionButtonsChosen == 0){
+        } else if (optionButtonsChosen == 1) {
             TabList(resultData = hourlyResult)
         }
     }
