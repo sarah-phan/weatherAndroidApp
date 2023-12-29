@@ -1,16 +1,19 @@
 package com.example.weatherapp.ui.components
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeekResult
 import com.example.weatherapp.ui.screen.HomeScreenHourly
 import com.example.weatherapp.ui.screen.HomeScreenWeekly
 
 @Composable
-fun TabList(resultData: Any) {
+fun TabList(
+    resultData: Any,
+    airPollutionForecastResult: AirPollutionForecastResult = AirPollutionForecastResult()
+) {
     var selectedIndex = remember {
         mutableStateOf(0)
     }
@@ -21,10 +24,14 @@ fun TabList(resultData: Any) {
                     hourlyDataList = listForecast,
                     selectedIndex = selectedIndex,
                 )
-                HomeScreenHourly(
-                    hourlyDataSelected = listForecast[selectedIndex.value],
-                    hourlyResultData = resultData
-                )
+                airPollutionForecastResult.list.let{
+                    HomeScreenHourly(
+                        hourlyDataSelected = listForecast[selectedIndex.value],
+                        hourlyResultData = resultData,
+                        airPollutionForecastResultSelected = it[selectedIndex.value + 1]
+                    )
+                }
+
             }
         }
     } else if (resultData is WeekResult) {

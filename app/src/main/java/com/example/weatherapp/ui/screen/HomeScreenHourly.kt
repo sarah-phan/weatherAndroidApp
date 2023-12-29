@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.screen
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
+import com.example.weatherapp.model.AirPollutionList
 import com.example.weatherapp.model.HourlyList
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.ui.components.HourlyDataUiBox
@@ -29,7 +31,9 @@ import kotlin.math.roundToInt
 fun HomeScreenHourly(
     hourlyDataSelected: HourlyList,
     hourlyResultData: HourlyResult,
+    airPollutionForecastResultSelected: AirPollutionList
 ) {
+    Log.d("airPollutionForecastResultSelected", airPollutionForecastResultSelected.toString())
     val subTitleTemp = listOf(
         R.string.feels_like,
         R.string.max,

@@ -29,6 +29,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
+import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeekResult
 import com.example.weatherapp.ui.theme.LightColorPalette
@@ -40,6 +41,7 @@ import kotlinx.coroutines.launch
 fun BSheetOptions(
     weeklyResult: WeekResult,
     hourlyResult: HourlyResult,
+    airPollutionForecastResult: AirPollutionForecastResult,
 ) {
     var optionButtonsChosen by remember { mutableStateOf(0) }
 
@@ -54,12 +56,9 @@ fun BSheetOptions(
         val coroutineScope = rememberCoroutineScope()
         val optionButtons = listOf("Current Weather", "Hourly Forecast", "Weekly Forecast")
         LazyRow(
-            state = lazyListState,
-            horizontalArrangement = Arrangement.spacedBy(
+            state = lazyListState, horizontalArrangement = Arrangement.spacedBy(
                 dimensionResource(id = R.dimen.padding_extra_small)
-            ),
-            userScrollEnabled = true,
-            modifier = Modifier
+            ), userScrollEnabled = true, modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     start = dimensionResource(id = R.dimen.padding_small),
@@ -110,7 +109,9 @@ fun BSheetOptions(
         if (optionButtonsChosen == 2) {
             TabList(resultData = weeklyResult)
         } else if (optionButtonsChosen == 1) {
-            TabList(resultData = hourlyResult)
+            TabList(
+                resultData = hourlyResult, airPollutionForecastResult = airPollutionForecastResult
+            )
         }
     }
 }

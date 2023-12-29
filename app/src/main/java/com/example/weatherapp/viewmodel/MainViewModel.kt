@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.api.RetrofitClient
+import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.Coord
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeekResult
@@ -23,6 +24,9 @@ class MainViewModel: ViewModel() {
 //    var weatherResponse: WeatherResult by mutableStateOf(WeatherResult())
     var weeklyResponse: WeekResult by mutableStateOf(WeekResult())
     var hourlyResponse: HourlyResult by mutableStateOf(HourlyResult())
+    var airPollutionForecastResponse: AirPollutionForecastResult by mutableStateOf(
+        AirPollutionForecastResult()
+    )
     var errorMsg: String by mutableStateOf("")
 
 //    fun getWeatherResponse(coord: Coord){
@@ -72,5 +76,21 @@ class MainViewModel: ViewModel() {
                  state = STATE.FAILED
              }
          }
+    }
+
+    fun getAirPollutionResponse(coord: Coord){
+        viewModelScope.launch {
+            state = STATE.LOADING
+            val apiService = RetrofitClient.getInstanceMain()
+            try {
+                val apiResponse = apiService.getAirPollutionForecast(coord.lat, coord.lon)
+                airPollutionForecastResponse = apiResponse
+                state = STATE.SUCCESS
+            }
+            catch (ex:Exception){
+                errorMsg = ex.message!!.toString()
+                state = STATE.FAILED
+            }
+        }
     }
 }
