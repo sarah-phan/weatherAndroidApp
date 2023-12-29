@@ -16,16 +16,13 @@ fun TabList(resultData: Any) {
     }
     if (resultData is HourlyResult) {
         resultData.list.let { listForecast ->
-            Log.d("resultData", resultData.toString())
-            Log.d("selectedIndex", selectedIndex.toString())
-
             if (listForecast.size > 0) {
-                val hourlyFromCurrent = HourlyTabList(
+                HourlyTabList(
                     hourlyDataList = listForecast,
                     selectedIndex = selectedIndex,
                 )
                 HomeScreenHourly(
-                    hourlyFromCurrentSelected = hourlyFromCurrent[selectedIndex.value],
+                    hourlyDataSelected = listForecast[selectedIndex.value],
                     hourlyResultData = resultData
                 )
             }

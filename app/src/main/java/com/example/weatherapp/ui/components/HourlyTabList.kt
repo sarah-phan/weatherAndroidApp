@@ -28,27 +28,12 @@ import com.example.weatherapp.model.HourlyList
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.utils.Utils
-import java.text.SimpleDateFormat
-import java.util.Date
 
 @Composable
 fun HourlyTabList(
     hourlyDataList: ArrayList<HourlyList>,
     selectedIndex: MutableState<Int>,
-): ArrayList<HourlyList>{
-    var hourlyFromCurrent: ArrayList<HourlyList> = arrayListOf()
-    val sdf = SimpleDateFormat("dd/MM/yyyy HH")
-    val currentDate = sdf.format(Date())
-    var shouldAddItems = false
-
-    hourlyDataList.forEachIndexed() { index, item ->
-        val dateHourDetail = if (item.dt == null) "00"
-        else Utils.timestampToHumanDate(item.dt!!.toLong(), "dd/MM/yyyy HH")
-        if (currentDate == dateHourDetail || shouldAddItems) {
-            hourlyFromCurrent.add(item)
-            shouldAddItems = true
-        }
-    }
+){
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,20 +43,14 @@ fun HourlyTabList(
             ),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        itemsIndexed(hourlyFromCurrent) { index, item ->
+        itemsIndexed(hourlyDataList) { index, item ->
             val dateHourDetail = if (item.dt == null) "00"
-            else Utils.timestampToHumanDate(item.dt!!.toLong(), "dd/MM/yyyy HH")
-            val hourAndMinuteDetail = if (item.dt == null) "00"
             else Utils.timestampToHumanDate(item.dt!!.toLong(), "HH:mm")
             val dateDetail = if (item.dt == null) "00"
             else Utils.timestampToHumanDate(item.dt!!.toLong(), "dd/MM")
             val weatherIcon = item.weather?.firstOrNull()?.icon
             val weatherMainInformation = item.weather?.firstOrNull()?.main
-            var timeShow = hourAndMinuteDetail
 
-            if (dateHourDetail == currentDate) {
-                timeShow = "NOW"
-            }
             Box(
                 modifier = Modifier
                     .height(140.dp)
@@ -96,7 +75,7 @@ fun HourlyTabList(
                         style = MaterialTheme.typography.titleSmall,
                     )
                     Text(
-                        text = "${timeShow}",
+                        text = "${dateHourDetail}",
                         color = LightColorPalette.onPrimaryContainer,
                         style = MaterialTheme.typography.titleSmall
                     )
@@ -114,5 +93,4 @@ fun HourlyTabList(
             }
         }
     }
-    return hourlyFromCurrent
 }
