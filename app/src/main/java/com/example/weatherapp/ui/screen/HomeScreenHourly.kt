@@ -1,6 +1,5 @@
 package com.example.weatherapp.ui.screen
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +17,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.model.AirPollutionList
 import com.example.weatherapp.model.HourlyList
 import com.example.weatherapp.model.HourlyResult
+import com.example.weatherapp.ui.components.AirPollutionBox
 import com.example.weatherapp.ui.components.DataUiBox
 import com.example.weatherapp.ui.components.SunriseSunsetUiBox
 import com.example.weatherapp.ui.components.WindDirection
@@ -33,7 +33,6 @@ fun HomeScreenHourly(
     hourlyResultData: HourlyResult,
     airPollutionForecastResultSelected: AirPollutionList
 ) {
-    Log.d("airPollutionForecastResultSelected", airPollutionForecastResultSelected.toString())
     val subTitleTemp = listOf(
         R.string.feels_like,
         R.string.max,
@@ -169,6 +168,8 @@ fun HomeScreenHourly(
             }
         }
 
+        //Air Quality
+        AirPollutionBox(airPollutionForecastResultSelected = airPollutionForecastResultSelected)
 
         //Wind
         DataUiBox(

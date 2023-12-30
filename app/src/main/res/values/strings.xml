@@ -18,5 +18,5 @@
     <string name="max">Max</string>
     <string name="min">Min</string>
     <string name="main_condition">Main Condition</string>
-    <string name="condition_description">Condition Description</string>
+    <string name="condition_description">Description</string>
 </resources>
