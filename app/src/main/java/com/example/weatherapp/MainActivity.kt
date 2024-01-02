@@ -140,7 +140,7 @@ class MainActivity : ComponentActivity() {
                         STATE.SUCCESS -> {
 //                            HomeScreenWeekly(mainViewModel.weeklyResponse)
 //                            HomeScreenHourly(mainViewModel.hourlyResponse)
-                            HomeScreen(mainViewModel.weeklyResponse, mainViewModel.hourlyResponse, mainViewModel.airPollutionForecastResponse)
+                            HomeScreen(mainViewModel.weeklyResponse, mainViewModel.hourlyResponse, mainViewModel.airPollutionForecastResponse, mainViewModel.weatherResponse)
                         }
                     }
                 }
@@ -157,7 +157,7 @@ class MainActivity : ComponentActivity() {
     }
     private fun fetchWeatherData(mainViewModel: MainViewModel,currentLocation:Coord){
         mainViewModel.state = STATE.LOADING
-//        mainViewModel.getWeatherResponse(currentLocation)
+        mainViewModel.getWeatherResponse(currentLocation)
         mainViewModel.getWeeklyResponse(currentLocation)
         mainViewModel.getHourlyResponse(currentLocation)
         mainViewModel.getAirPollutionResponse(currentLocation)
