@@ -140,7 +140,7 @@ class MainActivity : ComponentActivity() {
                         STATE.SUCCESS -> {
 //                            HomeScreenWeekly(mainViewModel.weeklyResponse)
 //                            HomeScreenHourly(mainViewModel.hourlyResponse)
-                            HomeScreen(mainViewModel.weeklyResponse, mainViewModel.hourlyResponse, mainViewModel.airPollutionForecastResponse, mainViewModel.weatherResponse)
+                            HomeScreen(mainViewModel.weatherResponse, mainViewModel.weeklyResponse, mainViewModel.hourlyResponse, mainViewModel.airPollutionForecastResponse)
                         }
                     }
                 }
