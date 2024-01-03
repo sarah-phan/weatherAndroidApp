@@ -86,7 +86,7 @@ fun BSheetOptions(
                         .padding(0.dp)
                         .widthIn(max = 150.dp),
                     border = BorderStroke(
-                        width = 1.dp, color = LightColorPalette.secondary
+                        width = 2.dp, color = LightColorPalette.secondary
                     )
                 ) {
                     Text(
