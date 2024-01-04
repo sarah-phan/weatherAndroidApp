@@ -17,6 +17,7 @@ data class WeatherResult(
     @SerializedName("cod") var cod: Int? = null,
     @SerializedName("name") var name: String? = null,
     @SerializedName("snow") var snow: SnowModel? = SnowModel(),
+    @SerializedName("rain") var rain: RainModel? = RainModel()
 )
 
 data class WeatherModel(

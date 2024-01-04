@@ -140,7 +140,7 @@ class MainActivity : ComponentActivity() {
                         STATE.SUCCESS -> {
 //                            HomeScreenWeekly(mainViewModel.weeklyResponse)
 //                            HomeScreenHourly(mainViewModel.hourlyResponse)
-                            HomeScreen(mainViewModel.weatherResponse, mainViewModel.weeklyResponse, mainViewModel.hourlyResponse, mainViewModel.airPollutionForecastResponse)
+                            HomeScreen(mainViewModel.weatherResponse, mainViewModel.weeklyResponse, mainViewModel.hourlyResponse, mainViewModel.airPollutionForecastResponse, mainViewModel.airPollutionCurrentResponse)
                         }
                     }
                 }
@@ -155,12 +155,13 @@ class MainActivity : ComponentActivity() {
         fusedLocationProviderClient = LocationServices
             .getFusedLocationProviderClient(this)
     }
-    private fun fetchWeatherData(mainViewModel: MainViewModel,currentLocation:Coord){
+    private fun fetchWeatherData(mainViewModel: MainViewModel, currentLocation:Coord){
         mainViewModel.state = STATE.LOADING
         mainViewModel.getWeatherResponse(currentLocation)
         mainViewModel.getWeeklyResponse(currentLocation)
         mainViewModel.getHourlyResponse(currentLocation)
         mainViewModel.getAirPollutionResponse(currentLocation)
+        mainViewModel.getAirPollutionCurrentResponse(currentLocation)
         mainViewModel.state = STATE.SUCCESS
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
+import com.example.weatherapp.model.AirPollutionCurrentResult
 import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeatherResult
@@ -25,7 +26,8 @@ fun BottomSheetScaffold(
     weeklyResult: WeekResult,
     hourlyResult: HourlyResult,
     weatherResult: WeatherResult,
-    airPollutionForecastResult: AirPollutionForecastResult
+    airPollutionForecastResult: AirPollutionForecastResult,
+    airPollutionCurrentResult: AirPollutionCurrentResult
 ) {
     Scaffold() {
         it
@@ -35,7 +37,9 @@ fun BottomSheetScaffold(
                 BSheetOptions(
                     weeklyResult = weeklyResult,
                     hourlyResult = hourlyResult,
-                    airPollutionForecastResult = airPollutionForecastResult
+                    airPollutionForecastResult = airPollutionForecastResult,
+                    weatherResult = weatherResult,
+                    airPollutionCurrentResult = airPollutionCurrentResult
                 )
             },
             scaffoldState = rememberBottomSheetScaffoldState(),

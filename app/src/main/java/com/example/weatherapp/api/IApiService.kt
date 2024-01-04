@@ -1,6 +1,7 @@
 package com.example.weatherapp.api
 
 import com.example.weatherapp.data.Key.Companion.APIKey
+import com.example.weatherapp.model.AirPollutionCurrentResult
 import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeatherResult
@@ -40,4 +41,10 @@ interface IApiService {
         @Query ("lon") lon:Double = 0.0,
         @Query ("appid") appId:String = APIKey
     ): AirPollutionForecastResult
+    @GET("air_pollution")
+    suspend fun getAirPollutionCurrent(
+        @Query ("lat") lat:Double = 0.0,
+        @Query ("lon") lon:Double = 0.0,
+        @Query ("appid") appId:String = APIKey
+    ): AirPollutionCurrentResult
 }
