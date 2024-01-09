@@ -1,6 +1,5 @@
 package com.example.weatherapp.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,14 +34,13 @@ import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.model.WeekResult
-import com.example.weatherapp.ui.screen.HomeScreenCurrentWeather
-import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.ui.theme.lineColor
 import kotlinx.coroutines.launch
 
 @Composable
 fun BSheetOptions(
+    darkTheme: Boolean,
     weeklyResult: WeekResult,
     hourlyResult: HourlyResult,
     airPollutionForecastResult: AirPollutionForecastResult,
@@ -55,7 +53,7 @@ fun BSheetOptions(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = LightColorPalette.surfaceVariant)
+            .background(color = MaterialTheme.colorScheme.surfaceVariant)
             .verticalScroll(rememberScrollState())
     ) {
         val lazyListState = rememberLazyListState()
@@ -85,18 +83,18 @@ fun BSheetOptions(
                     },
                     shape = Shapes.medium,
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isOptionButtonsChosen) LightColorPalette.secondary else Color.Transparent,
+                        containerColor = if (isOptionButtonsChosen) MaterialTheme.colorScheme.secondary else Color.Transparent,
                     ),
                     modifier = Modifier
                         .padding(0.dp)
                         .widthIn(max = 150.dp),
                     border = BorderStroke(
-                        width = 2.dp, color = LightColorPalette.secondary
+                        width = 2.dp, color = MaterialTheme.colorScheme.secondary
                     )
                 ) {
                     Text(
                         text = optionButtons[index],
-                        color = if (isOptionButtonsChosen) LightColorPalette.onSecondary else LightColorPalette.onSurfaceVariant,
+                        color = if (isOptionButtonsChosen) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.titleSmall,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(0.dp)
@@ -114,15 +112,18 @@ fun BSheetOptions(
 
         if (optionButtonsChosen == 0) {
             TabList(
+                darkTheme,
                 resultData = weatherResult,
                 airPollutionCurrentResult = airPollutionCurrentResult
             )
         } else if (optionButtonsChosen == 1) {
             TabList(
+                darkTheme,
                 resultData = hourlyResult, airPollutionForecastResult = airPollutionForecastResult
             )
         }else if (optionButtonsChosen == 2){
-            TabList(resultData = weeklyResult)
+            TabList(darkTheme,
+                resultData = weeklyResult)
         }
     }
 }

@@ -29,6 +29,7 @@ import kotlin.math.roundToInt
 
 @Composable
 fun HomeScreenHourly(
+    darkTheme: Boolean,
     hourlyDataSelected: HourlyList,
     hourlyResultData: HourlyResult,
     airPollutionForecastResultSelected: AirPollutionList
@@ -146,7 +147,7 @@ fun HomeScreenHourly(
                 SunriseSunsetUiBox(
                     title = "Sunrise",
                     content = sunriseValue,
-                    imageId = R.drawable.sunrise_image
+                    imageId = if(darkTheme) R.drawable.sunrise_2 else R.drawable.sunrise_image
                 )
             }
 
@@ -163,7 +164,7 @@ fun HomeScreenHourly(
                 SunriseSunsetUiBox(
                     title = "Sunset",
                     content = sunsetValue,
-                    imageId = R.drawable.sunset_image
+                    imageId = if(darkTheme) R.drawable.sunset_2 else R.drawable.sunset_image
                 )
             }
         }

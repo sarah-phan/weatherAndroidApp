@@ -15,6 +15,7 @@ import com.example.weatherapp.ui.screen.HomeScreenWeekly
 
 @Composable
 fun TabList(
+    darkTheme: Boolean,
     resultData: Any,
     airPollutionForecastResult: AirPollutionForecastResult = AirPollutionForecastResult(),
     airPollutionCurrentResult: AirPollutionCurrentResult = AirPollutionCurrentResult()
@@ -31,6 +32,7 @@ fun TabList(
                 )
                 airPollutionForecastResult.list.let{
                     HomeScreenHourly(
+                        darkTheme,
                         hourlyDataSelected = listForecast[selectedIndex.value],
                         hourlyResultData = resultData,
                         airPollutionForecastResultSelected = it[selectedIndex.value + 1]
@@ -52,6 +54,7 @@ fun TabList(
         }
     } else if (resultData is WeatherResult) {
             HomeScreenCurrentWeather(
+                darkTheme,
                 weatherData = resultData,
                 airPollutionCurrentResultSelected = airPollutionCurrentResult.list
             )

@@ -27,6 +27,7 @@ import kotlin.math.roundToInt
 
 @Composable
 fun HomeScreenCurrentWeather(
+    darkTheme: Boolean,
     weatherData: WeatherResult,
     airPollutionCurrentResultSelected: AirPollutionList
 ){
@@ -148,7 +149,7 @@ fun HomeScreenCurrentWeather(
                     SunriseSunsetUiBox(
                         title = "Sunrise",
                         content = sunriseValue,
-                        imageId = R.drawable.sunrise_image
+                        imageId = if(darkTheme) R.drawable.sunrise_2 else R.drawable.sunrise_image ,
                     )
                 }
             }
@@ -167,7 +168,7 @@ fun HomeScreenCurrentWeather(
                     SunriseSunsetUiBox(
                         title = "Sunset",
                         content = sunsetValue,
-                        imageId = R.drawable.sunset_image
+                        imageId = if(darkTheme) R.drawable.sunset_2 else R.drawable.sunset_image
                     )
                 }
             }

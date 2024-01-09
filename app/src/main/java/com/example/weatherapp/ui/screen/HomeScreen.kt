@@ -11,6 +11,8 @@ import com.example.weatherapp.ui.components.BottomSheetScaffold
 
 @Composable
 fun HomeScreen(
+    darkTheme: Boolean,
+    onThemeUpdated: (Boolean)-> Unit,
     weatherResult: WeatherResult,
     weeklyResult: WeekResult,
     hourlyResult: HourlyResult,
@@ -20,6 +22,8 @@ fun HomeScreen(
 //    Log.d("test", airPollutionForecastResult.toString())
 
     BottomSheetScaffold(
+        darkTheme= darkTheme,
+        onThemeUpdated = onThemeUpdated,
         weeklyResult = weeklyResult,
         hourlyResult = hourlyResult,
         airPollutionForecastResult = airPollutionForecastResult,

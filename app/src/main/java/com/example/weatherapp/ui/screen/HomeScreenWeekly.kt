@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
 import com.example.weatherapp.model.List2
 import com.example.weatherapp.ui.components.WindDirection
-import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.ui.theme.lineColor
 import kotlin.math.roundToInt
@@ -86,7 +85,7 @@ fun HomeScreenWeekly(weeklyDetailSelected: List2) {
             modifier = Modifier
                 .padding(top = dimensionResource(id = R.dimen.padding_small))
                 .align(Alignment.CenterHorizontally),
-            color = LightColorPalette.onSurface,
+            color = MaterialTheme.colorScheme.onSurface,
             style = MaterialTheme.typography.titleSmall
         )
         LazyColumn(
@@ -101,7 +100,7 @@ fun HomeScreenWeekly(weeklyDetailSelected: List2) {
                 ) {
                     Text(
                         modifier = Modifier.width(200.dp),
-                        color = LightColorPalette.onSurface,
+                        color = MaterialTheme.colorScheme.onSurface,
                         text = stringResource(id = item),
                         textAlign = TextAlign.Start,
                         style = MaterialTheme.typography.bodyMedium
@@ -146,7 +145,7 @@ fun HomeScreenWeekly(weeklyDetailSelected: List2) {
                     }
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                        color = LightColorPalette.onSurface,
+                        color = MaterialTheme.colorScheme.onSurface,
                         text = string,
                         textAlign = TextAlign.End,
                         fontWeight = FontWeight.Bold,
@@ -205,7 +204,7 @@ fun PeriodData(period: String, infor: List2) {
             modifier = Modifier
                 .width(65.dp)
                 .padding(top = dimensionResource(id = R.dimen.padding_extra_small))
-                .background(color = LightColorPalette.tertiary, shape = Shapes.extraSmall),
+                .background(color = MaterialTheme.colorScheme.tertiary, shape = Shapes.extraSmall),
         ) {
             Text(
                 text = "${period}h",
@@ -213,7 +212,7 @@ fun PeriodData(period: String, infor: List2) {
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .align(Alignment.Center),
-                color = LightColorPalette.onPrimaryContainer,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 style = MaterialTheme.typography.titleSmall,
             )
         }
@@ -229,14 +228,14 @@ fun PeriodData(period: String, infor: List2) {
                     Text(
                         text = stringResource(id = R.string.temperature),
                         textAlign = TextAlign.Left,
-                        color = LightColorPalette.onSurface,
+                        color = MaterialTheme.colorScheme.onSurface,
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(top = 2.dp)
                     )
                     Text(
                         text = "${temp}°",
                         textAlign = TextAlign.Left,
-                        color = LightColorPalette.onSurface,
+                        color = MaterialTheme.colorScheme.onSurface,
                         style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier.height(25.dp)
                     )
@@ -247,14 +246,14 @@ fun PeriodData(period: String, infor: List2) {
                     Text(
                         text = stringResource(id = R.string.feels_like),
                         textAlign = TextAlign.Left,
-                        color = LightColorPalette.onSurface,
+                        color = MaterialTheme.colorScheme.onSurface,
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(top = 3.dp)
                     )
                     Text(
                         text = "${feels_like}°",
                         textAlign = TextAlign.Left,
-                        color = LightColorPalette.onSurface,
+                        color = MaterialTheme.colorScheme.onSurface,
                         style = MaterialTheme.typography.titleSmall,
                         modifier = Modifier.height(25.dp)
                     )

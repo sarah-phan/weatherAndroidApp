@@ -5,6 +5,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 val DarkColorPalette = darkColorScheme(
     primary = theme_dark_primary,
@@ -19,12 +23,12 @@ val DarkColorPalette = darkColorScheme(
     onTertiary = theme_dark_onTertiary,
     tertiaryContainer = theme_dark_tertiaryContainer,
     onTertiaryContainer = theme_dark_onTertiaryContainer,
-    surface = theme_dark_surface,
+    //surface = theme_dark_surface,
     onSurface = theme_dark_onSurface,
     error = theme_dark_error,
     onError = theme_dark_onError,
     surfaceVariant = theme_dark_surfaceContainer,
-    onSurfaceVariant = theme_dark_onSurfaceContainer
+    onSurfaceVariant = theme_dark_onSurfaceContainer,
 )
 
 val LightColorPalette = lightColorScheme(
@@ -40,7 +44,7 @@ val LightColorPalette = lightColorScheme(
     onTertiary = theme_light_onTertiary,
     tertiaryContainer = theme_light_tertiaryContainer,
     onTertiaryContainer = theme_light_onTertiaryContainer,
-    surface = theme_light_surface,
+    //surface = theme_light_surface,
     onSurface = theme_light_onSurface,
     error = theme_light_error,
     onError = theme_light_onError,
@@ -48,7 +52,6 @@ val LightColorPalette = lightColorScheme(
     onSurfaceVariant = theme_light_onSurfaceContainer
 
 )
-
 @Composable
 fun WeatherAppTheme(darktheme: Boolean= isSystemInDarkTheme(),content: @Composable() ()->Unit){
     val colors = if(darktheme){
@@ -59,8 +62,7 @@ fun WeatherAppTheme(darktheme: Boolean= isSystemInDarkTheme(),content: @Composab
     }
 
     MaterialTheme(
-        colorScheme = LightColorPalette,
-//        colorScheme = colors,
+        colorScheme = colors,
         typography = Typography,
         shapes = Shapes,
         content = content

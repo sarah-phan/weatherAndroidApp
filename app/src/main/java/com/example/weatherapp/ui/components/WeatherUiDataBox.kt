@@ -82,7 +82,7 @@ fun SunriseSunsetUiBox(
     title: String,
     content: String,
     imageId: Int,
-) {
+    ) {
     Column(
         modifier = Modifier
             .padding(
