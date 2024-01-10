@@ -56,7 +56,7 @@ fun BottomSheetScaffold(
                 contentDescription = "",
                 modifier = Modifier.fillMaxHeight(),
                 contentScale = ContentScale.Crop,
-                alpha = 0.25f
+                alpha = if(darkTheme) 1f else 0.25f
             )
             HomeScreenMainWeatherInfor(darkTheme = darkTheme, onThemeUpdated = onThemeUpdated, weatherDataList = weatherResult)
         }

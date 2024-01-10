@@ -23,12 +23,13 @@ val DarkColorPalette = darkColorScheme(
     onTertiary = theme_dark_onTertiary,
     tertiaryContainer = theme_dark_tertiaryContainer,
     onTertiaryContainer = theme_dark_onTertiaryContainer,
-    //surface = theme_dark_surface,
+    surface = theme_dark_surface,
     onSurface = theme_dark_onSurface,
     error = theme_dark_error,
     onError = theme_dark_onError,
     surfaceVariant = theme_dark_surfaceContainer,
     onSurfaceVariant = theme_dark_onSurfaceContainer,
+    outline = theme_dark_outline
 )
 
 val LightColorPalette = lightColorScheme(
@@ -44,13 +45,13 @@ val LightColorPalette = lightColorScheme(
     onTertiary = theme_light_onTertiary,
     tertiaryContainer = theme_light_tertiaryContainer,
     onTertiaryContainer = theme_light_onTertiaryContainer,
-    //surface = theme_light_surface,
+    surface = theme_light_surface,
     onSurface = theme_light_onSurface,
     error = theme_light_error,
     onError = theme_light_onError,
     surfaceVariant = theme_light_surfaceContainer,
-    onSurfaceVariant = theme_light_onSurfaceContainer
-
+    onSurfaceVariant = theme_light_onSurfaceContainer,
+    outline = theme_light_outline
 )
 @Composable
 fun WeatherAppTheme(darktheme: Boolean= isSystemInDarkTheme(),content: @Composable() ()->Unit){

@@ -70,12 +70,12 @@ fun HourlyTabList(
                 ) {
                     Text(
                         text = "${dateDetail.uppercase()}",
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = if (index == selectedIndex.value) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer,
                         style = MaterialTheme.typography.titleSmall,
                     )
                     Text(
                         text = "${dateHourDetail}",
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = if (index == selectedIndex.value) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer,
                         style = MaterialTheme.typography.titleSmall
                     )
                     if (weatherIcon != null) {

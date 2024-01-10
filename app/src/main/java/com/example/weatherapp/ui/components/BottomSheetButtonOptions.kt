@@ -35,7 +35,6 @@ import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.model.WeekResult
 import com.example.weatherapp.ui.theme.Shapes
-import com.example.weatherapp.ui.theme.lineColor
 import kotlinx.coroutines.launch
 
 @Composable
@@ -105,7 +104,7 @@ fun BSheetOptions(
 
 
         Divider(
-            color = lineColor,
+            color = MaterialTheme.colorScheme.outline,
             thickness = 1.dp,
             modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_small))
         )

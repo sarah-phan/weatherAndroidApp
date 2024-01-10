@@ -75,12 +75,12 @@ fun WeeklyTabList(
                 ) {
                     Text(
                         text = "${day.uppercase()}",
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = if (index == selectedIndex.value) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer,
                         style = MaterialTheme.typography.titleSmall,
                     )
                     Text(
                         text = "${time}",
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = if (index == selectedIndex.value) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer,
                         style = MaterialTheme.typography.titleSmall
                     )
                     if (weatherIcon != null) {

@@ -35,7 +35,7 @@ import com.example.weatherapp.data.Key.Companion.permissions
 import com.example.weatherapp.model.Coord
 import com.example.weatherapp.ui.screen.HomeScreen
 import com.example.weatherapp.ui.theme.WeatherAppTheme
-import com.example.weatherapp.ui.theme.lineColor
+//import com.example.weatherapp.ui.theme.lineColor
 import com.example.weatherapp.ui.theme.theme_light_primary
 import com.example.weatherapp.viewmodel.MainViewModel
 import com.example.weatherapp.viewmodel.STATE
@@ -107,7 +107,7 @@ class MainActivity : ComponentActivity() {
             var darkTheme by remember { mutableStateOf(false)}
             WeatherAppTheme(darktheme = darkTheme ) {
                 Surface(
-                    color = lineColor,
+                    color = MaterialTheme.colorScheme.outline,
                     modifier = Modifier.fillMaxSize()) {
                     var locationRequired: Boolean = false
                     val launcherMultiplePermissions = rememberLauncherForActivityResult(

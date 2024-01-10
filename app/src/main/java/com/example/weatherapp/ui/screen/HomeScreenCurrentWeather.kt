@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +22,7 @@ import com.example.weatherapp.ui.components.DataUiBox
 import com.example.weatherapp.ui.components.SunriseSunsetUiBox
 import com.example.weatherapp.ui.components.WindDirection
 import com.example.weatherapp.ui.theme.Shapes
-import com.example.weatherapp.ui.theme.lineColor
+//import com.example.weatherapp.ui.theme.lineColor
 import com.example.weatherapp.utils.Utils
 import kotlin.math.roundToInt
 
@@ -139,7 +140,7 @@ fun HomeScreenCurrentWeather(
                 modifier = Modifier
                     .weight(0.5f)
                     .border(
-                        border = BorderStroke(2.dp, lineColor),
+                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline),
                         shape = Shapes.medium
                     ),
                 contentAlignment = Alignment.Center
@@ -159,7 +160,7 @@ fun HomeScreenCurrentWeather(
                 modifier = Modifier
                     .weight(0.5f)
                     .border(
-                        border = BorderStroke(2.dp, lineColor),
+                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline),
                         shape = Shapes.medium
                     ),
                 contentAlignment = Alignment.Center

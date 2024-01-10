@@ -69,6 +69,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     //Load icon weather URL
     implementation ("io.coil-kt:coil-compose:2.5.0")
+    implementation("androidx.core:core-ktx:+")
 
 
     testImplementation("junit:junit:4.13.2")

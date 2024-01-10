@@ -35,7 +35,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.model.List2
 import com.example.weatherapp.ui.components.WindDirection
 import com.example.weatherapp.ui.theme.Shapes
-import com.example.weatherapp.ui.theme.lineColor
+//import com.example.weatherapp.ui.theme.lineColor
 import kotlin.math.roundToInt
 
 @Composable
@@ -76,7 +76,7 @@ fun HomeScreenWeekly(weeklyDetailSelected: List2) {
                 end = dimensionResource(id = R.dimen.padding_small),
                 bottom = dimensionResource(id = R.dimen.padding_small)
             )
-            .border(BorderStroke(2.dp, lineColor), shape = Shapes.medium)
+            .border(BorderStroke(2.dp, MaterialTheme.colorScheme.outline), shape = Shapes.medium)
             .background(Color.Transparent)
     ) {
         Text(
