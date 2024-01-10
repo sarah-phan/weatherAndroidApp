@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.weatherapp.R
 import com.example.weatherapp.model.List2
-import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.utils.Utils
 
@@ -61,7 +60,7 @@ fun WeeklyTabList(
                     .height(140.dp)
                     .width(60.dp)
                     .background(
-                        color = if (index == selectedIndex.value) LightColorPalette.primary else LightColorPalette.primaryContainer,
+                        color = if (index == selectedIndex.value) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer,
                         shape = Shapes.large
                     )
                     .selectable(selected = item.dt == selectedIndex.value, onClick = {
@@ -76,12 +75,12 @@ fun WeeklyTabList(
                 ) {
                     Text(
                         text = "${day.uppercase()}",
-                        color = LightColorPalette.onPrimaryContainer,
+                        color = if (index == selectedIndex.value) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer,
                         style = MaterialTheme.typography.titleSmall,
                     )
                     Text(
                         text = "${time}",
-                        color = LightColorPalette.onPrimaryContainer,
+                        color = if (index == selectedIndex.value) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer,
                         style = MaterialTheme.typography.titleSmall
                     )
                     if (weatherIcon != null) {

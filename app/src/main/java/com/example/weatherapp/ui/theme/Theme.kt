@@ -5,6 +5,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 val DarkColorPalette = darkColorScheme(
     primary = theme_dark_primary,
@@ -24,7 +28,8 @@ val DarkColorPalette = darkColorScheme(
     error = theme_dark_error,
     onError = theme_dark_onError,
     surfaceVariant = theme_dark_surfaceContainer,
-    onSurfaceVariant = theme_dark_onSurfaceContainer
+    onSurfaceVariant = theme_dark_onSurfaceContainer,
+    outline = theme_dark_outline
 )
 
 val LightColorPalette = lightColorScheme(
@@ -45,10 +50,9 @@ val LightColorPalette = lightColorScheme(
     error = theme_light_error,
     onError = theme_light_onError,
     surfaceVariant = theme_light_surfaceContainer,
-    onSurfaceVariant = theme_light_onSurfaceContainer
-
+    onSurfaceVariant = theme_light_onSurfaceContainer,
+    outline = theme_light_outline
 )
-
 @Composable
 fun WeatherAppTheme(darktheme: Boolean= isSystemInDarkTheme(),content: @Composable() ()->Unit){
     val colors = if(darktheme){
@@ -59,8 +63,7 @@ fun WeatherAppTheme(darktheme: Boolean= isSystemInDarkTheme(),content: @Composab
     }
 
     MaterialTheme(
-        colorScheme = LightColorPalette,
-//        colorScheme = colors,
+        colorScheme = colors,
         typography = Typography,
         shapes = Shapes,
         content = content

@@ -1,9 +1,12 @@
 package com.example.weatherapp.ui.components
 
+import android.widget.Space
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -11,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import coil.compose.AsyncImage
 import com.example.weatherapp.R
 import com.example.weatherapp.model.CLoudModel
@@ -31,14 +37,19 @@ import com.example.weatherapp.model.SysModel
 import com.example.weatherapp.model.WeatherModel
 import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.model.WindModel
+import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Manjari
-import com.example.weatherapp.ui.theme.theme_light_onSurfaceContainer
-import com.example.weatherapp.ui.theme.theme_light_tertiary
+import com.example.weatherapp.viewmodel.MainViewModel
+
 
 @Composable
 fun HomeScreenMainWeatherInfor(
-    weatherDataList: WeatherResult
-) {
+    weatherDataList: WeatherResult,
+    darkTheme: Boolean,
+    onThemeUpdated: (Boolean)-> Unit,
+
+
+    ) {
     val cityName: String = weatherDataList.name.toString()
     val countryName: String = weatherDataList.sys?.country.toString()
     val weatherDescription = weatherDataList.weather?.firstOrNull()?.main.toString()
@@ -52,17 +63,27 @@ fun HomeScreenMainWeatherInfor(
     val winDescription: String = weatherDataList.wind?.speed.toString()
     val keepDryImage = painterResource(id = R.drawable.keep_dry_color)
     val dryDescription: String = weatherDataList.main?.humidity.toString()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        Image(
-            painter = image,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(30.dp)
-        )
+        Row(modifier = Modifier
+                .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
+            Image(
+                painter = image,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(30.dp)
+            )
+            Switch(
+                checked = darkTheme,
+                onCheckedChange = onThemeUpdated,
+            )
+        }
+
+
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
@@ -70,7 +91,7 @@ fun HomeScreenMainWeatherInfor(
         ) {
             Text(
                 text = cityName,
-                color = theme_light_onSurfaceContainer,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontFamily = Manjari,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -80,7 +101,7 @@ fun HomeScreenMainWeatherInfor(
             )
             Text(
                 text = countryName,
-                color = theme_light_tertiary,
+                color = MaterialTheme.colorScheme.tertiary,
                 fontFamily = Manjari,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -93,13 +114,13 @@ fun HomeScreenMainWeatherInfor(
         ) {
             Text(
                 text = weatherTemperature,
-                color = theme_light_onSurfaceContainer,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontFamily = Manjari,
                 fontSize = 32.sp,
             )
             Text(
                 text = weatherDescription,
-                color = theme_light_onSurfaceContainer,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontFamily = Manjari,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
@@ -110,7 +131,7 @@ fun HomeScreenMainWeatherInfor(
             ) {
                 Text(
                     text = "Max: $maxTemp",
-                    color = theme_light_onSurfaceContainer,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontFamily = Manjari,
                     fontSize = 16.sp,
                     modifier = Modifier
@@ -118,7 +139,7 @@ fun HomeScreenMainWeatherInfor(
                 )
                 Text(
                     text = "Min: $minTemp",
-                    color = theme_light_onSurfaceContainer,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontFamily = Manjari,
                     fontSize = 16.sp,
                     modifier = Modifier
@@ -163,21 +184,21 @@ fun HomeScreenMainWeatherInfor(
                 ) {
                     Text(
                         text = weatherDescriptionDetail,
-                        color = theme_light_onSurfaceContainer,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontFamily = Manjari,
                         fontSize = 16.sp,
                         modifier = Modifier
                     )
                     Text(
                         text = "$winDescription mps",
-                        color = theme_light_onSurfaceContainer,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontFamily = Manjari,
                         fontSize = 16.sp,
                         modifier = Modifier
                     )
                     Text(
                         text = "$dryDescription %",
-                        color = theme_light_onSurfaceContainer,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontFamily = Manjari,
                         fontSize = 16.sp,
                     )
@@ -187,55 +208,55 @@ fun HomeScreenMainWeatherInfor(
     }
 }
 
-@Preview
-@Composable
-fun HomeScreenMainWeatherInforPreview() {
-    val weather1 = WeatherModel(
-        id = 501, main = "Rain", description = "moderate rain", icon = "10d"
-    )
-    val weatherList = ArrayList(listOf(weather1))
-    HomeScreenMainWeatherInfor(
-        weatherDataList = WeatherResult(
-            coord = Coordinates(
-                lon = 10.99,
-                lat = 44.34
-            ),
-            weather = weatherList,
-            base = "stations",
-            main = MainModel(
-                temp = 298.48,
-                feels_like = 298.74,
-                temp_min = 297.56,
-                temp_max = 300.05,
-                pressure = 1015.00,
-                humidity = 64.00,
-                sea_level = 1015.00,
-                grnd_level = 933.00
-            ),
-            visibility = 10000,
-            wind = WindModel(
-                speed = 0.62,
-                deg = 349,
-                gust = 1.18
-            ),
-            clouds = CLoudModel(
-                all = 100
-            ),
-            dt = 1661870592,
-            sys = SysModel(
-                type = 2,
-                id = 2075663,
-                country = "IT",
-                sunrise = 1661834187,
-                sunset = 1661882248
-            ),
-            timezone = 7200,
-            id = 3163858,
-            name = "Zocca",
-            cod = 200,
-            snow = SnowModel(
-                d1h = 3.16
-            )
-        )
-    )
-}
+//@Preview
+//@Composable
+//fun HomeScreenMainWeatherInforPreview() {
+//    val weather1 = WeatherModel(
+//        id = 501, main = "Rain", description = "moderate rain", icon = "10d"
+//    )
+//    val weatherList = ArrayList(listOf(weather1))
+//    HomeScreenMainWeatherInfor(
+//        weatherDataList = WeatherResult(
+//            coord = Coordinates(
+//                lon = 10.99,
+//                lat = 44.34
+//            ),
+//            weather = weatherList,
+//            base = "stations",
+//            main = MainModel(
+//                temp = 298.48,
+//                feels_like = 298.74,
+//                temp_min = 297.56,
+//                temp_max = 300.05,
+//                pressure = 1015.00,
+//                humidity = 64.00,
+//                sea_level = 1015.00,
+//                grnd_level = 933.00
+//            ),
+//            visibility = 10000,
+//            wind = WindModel(
+//                speed = 0.62,
+//                deg = 349,
+//                gust = 1.18
+//            ),
+//            clouds = CLoudModel(
+//                all = 100
+//            ),
+//            dt = 1661870592,
+//            sys = SysModel(
+//                type = 2,
+//                id = 2075663,
+//                country = "IT",
+//                sunrise = 1661834187,
+//                sunset = 1661882248
+//            ),
+//            timezone = 7200,
+//            id = 3163858,
+//            name = "Zocca",
+//            cod = 200,
+//            snow = SnowModel(
+//                d1h = 3.16
+//            )
+//        )
+//    )
+//}
