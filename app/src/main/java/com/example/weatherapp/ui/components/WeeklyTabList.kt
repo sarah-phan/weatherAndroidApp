@@ -35,7 +35,6 @@ fun WeeklyTabList(
     weeklyDataList: ArrayList<List2>,
     selectedIndex: MutableState<Int>
 ) {
-    Log.d("weeklyDataList", weeklyDataList.toString())
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()

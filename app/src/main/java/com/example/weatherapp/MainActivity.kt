@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -27,9 +28,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp.data.Key.Companion.permissions
 import com.example.weatherapp.model.Coord
-import com.example.weatherapp.ui.screen.HomeScreen
+import com.example.weatherapp.ui.theme.SetupNavGraph
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 import com.example.weatherapp.ui.theme.theme_light_primary
 import com.example.weatherapp.viewmodel.MainViewModel
@@ -47,6 +50,8 @@ class MainActivity : ComponentActivity() {
     private lateinit var locationCallback: LocationCallback
     private lateinit var mainViewModel: MainViewModel
     private var locationRequired: Boolean = false
+    private lateinit var navController: NavHostController
+
     override fun onResume() {
         super.onResume()
         if(locationRequired)startLocationUpdate()
@@ -138,9 +143,25 @@ class MainActivity : ComponentActivity() {
                             ErrorScreen(mainViewModel.errorMsg,currentLocation)
                         }
                         STATE.SUCCESS -> {
+                            navController = rememberNavController()
+                            SetupNavGraph(
+                                navController = navController,
+                                mainViewModel.weatherResponse,
+                                mainViewModel.weeklyResponse,
+                                mainViewModel.hourlyResponse,
+                                mainViewModel.airPollutionForecastResponse,
+                                mainViewModel.airPollutionCurrentResponse
+                            )
 //                            HomeScreenWeekly(mainViewModel.weeklyResponse)
 //                            HomeScreenHourly(mainViewModel.hourlyResponse)
-                            HomeScreen(mainViewModel.weatherResponse, mainViewModel.weeklyResponse, mainViewModel.hourlyResponse, mainViewModel.airPollutionForecastResponse, mainViewModel.airPollutionCurrentResponse)
+//                            HomeScreen(
+//                                mainViewModel.weatherResponse,
+//                                mainViewModel.weeklyResponse,
+//                                mainViewModel.hourlyResponse,
+//                                mainViewModel.airPollutionForecastResponse,
+//                                mainViewModel.airPollutionCurrentResponse,
+//                                navController
+//                            )
                         }
                     }
                 }

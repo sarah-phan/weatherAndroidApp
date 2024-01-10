@@ -1,6 +1,8 @@
 package com.example.weatherapp.ui.screen
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.weatherapp.model.AirPollutionCurrentResult
 import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.HourlyResult
@@ -15,18 +17,18 @@ fun HomeScreen(
     weeklyResult: WeekResult,
     hourlyResult: HourlyResult,
     airPollutionForecastResult: AirPollutionForecastResult,
-    airPollutionCurrentResult: AirPollutionCurrentResult
+    airPollutionCurrentResult: AirPollutionCurrentResult,
+    navController: NavHostController
 ) {
 //    Log.d("test", airPollutionForecastResult.toString())
-
     BottomSheetScaffold(
         weeklyResult = weeklyResult,
         hourlyResult = hourlyResult,
         airPollutionForecastResult = airPollutionForecastResult,
         weatherResult = weatherResult,
-        airPollutionCurrentResult = airPollutionCurrentResult
+        airPollutionCurrentResult = airPollutionCurrentResult,
+        navController = navController
     )
-
 }
 
 

@@ -9,7 +9,7 @@ data class AirPollutionForecastResult(
 
 data class AirPollutionCurrentResult(
     @SerializedName("coord") var coord: Coordinates = Coordinates(),
-    @SerializedName("list") var list: AirPollutionList = AirPollutionList()
+    @SerializedName("list") var list: ArrayList<AirPollutionList> = arrayListOf()
 )
 
 data class AirPollutionList(

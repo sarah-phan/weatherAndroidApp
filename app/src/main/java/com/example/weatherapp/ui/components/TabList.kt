@@ -1,6 +1,5 @@
 package com.example.weatherapp.ui.components
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,9 +50,13 @@ fun TabList(
             }
         }
     } else if (resultData is WeatherResult) {
-            HomeScreenCurrentWeather(
-                weatherData = resultData,
-                airPollutionCurrentResultSelected = airPollutionCurrentResult.list
-            )
+        airPollutionCurrentResult.list.let {
+            it.firstOrNull()?.let { it1 ->
+                HomeScreenCurrentWeather(
+                    weatherData = resultData,
+                    airPollutionCurrentResultSelected = it1
+                )
+            }
+        }
     }
 }

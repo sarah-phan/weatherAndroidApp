@@ -1,6 +1,5 @@
 package com.example.weatherapp.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,7 +34,6 @@ import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.model.WeekResult
-import com.example.weatherapp.ui.screen.HomeScreenCurrentWeather
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
 import com.example.weatherapp.ui.theme.lineColor

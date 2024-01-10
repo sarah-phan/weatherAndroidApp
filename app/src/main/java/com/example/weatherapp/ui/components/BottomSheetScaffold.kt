@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.weatherapp.R
 import com.example.weatherapp.model.AirPollutionCurrentResult
 import com.example.weatherapp.model.AirPollutionForecastResult
@@ -27,7 +28,8 @@ fun BottomSheetScaffold(
     hourlyResult: HourlyResult,
     weatherResult: WeatherResult,
     airPollutionForecastResult: AirPollutionForecastResult,
-    airPollutionCurrentResult: AirPollutionCurrentResult
+    airPollutionCurrentResult: AirPollutionCurrentResult,
+    navController: NavController
 ) {
     Scaffold() {
         it
@@ -53,7 +55,7 @@ fun BottomSheetScaffold(
                 contentScale = ContentScale.Crop,
                 alpha = 0.25f
             )
-            HomeScreenMainWeatherInfor(weatherDataList = weatherResult)
+            HomeScreenMainWeatherInfor(weatherDataList = weatherResult, navController = navController)
         }
 
     }
