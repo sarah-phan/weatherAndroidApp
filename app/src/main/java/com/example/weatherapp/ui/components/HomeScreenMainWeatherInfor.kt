@@ -1,19 +1,16 @@
 package com.example.weatherapp.ui.components
 
-import android.widget.Space
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -23,23 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.weatherapp.R
-import com.example.weatherapp.model.CLoudModel
-import com.example.weatherapp.model.Coordinates
-import com.example.weatherapp.model.MainModel
-import com.example.weatherapp.model.SnowModel
-import com.example.weatherapp.model.SysModel
-import com.example.weatherapp.model.WeatherModel
 import com.example.weatherapp.model.WeatherResult
-import com.example.weatherapp.model.WindModel
-import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Manjari
-import com.example.weatherapp.viewmodel.MainViewModel
+import com.example.weatherapp.ui.theme.Screen
 
 
 @Composable
@@ -47,8 +35,7 @@ fun HomeScreenMainWeatherInfor(
     weatherDataList: WeatherResult,
     darkTheme: Boolean,
     onThemeUpdated: (Boolean)-> Unit,
-
-
+    navController: NavController
     ) {
     val cityName: String = weatherDataList.name.toString()
     val countryName: String = weatherDataList.sys?.country.toString()
@@ -76,6 +63,7 @@ fun HomeScreenMainWeatherInfor(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(30.dp)
+                    .clickable { navController.navigate(Screen.Insert.route) }
             )
             Switch(
                 checked = darkTheme,

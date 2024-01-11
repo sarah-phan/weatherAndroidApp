@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
@@ -12,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.weatherapp.R
 import com.example.weatherapp.model.AirPollutionCurrentResult
 import com.example.weatherapp.model.AirPollutionForecastResult
@@ -25,21 +25,21 @@ import com.example.weatherapp.ui.theme.bottomSheetShape
 @OptIn(ExperimentalMaterial3Api::class)
 fun BottomSheetScaffold(
     darkTheme: Boolean,
-    onThemeUpdated: (Boolean)-> Unit,
+    onThemeUpdated: (Boolean) -> Unit,
     weeklyResult: WeekResult,
     hourlyResult: HourlyResult,
     weatherResult: WeatherResult,
     airPollutionForecastResult: AirPollutionForecastResult,
-    airPollutionCurrentResult: AirPollutionCurrentResult
+    airPollutionCurrentResult: AirPollutionCurrentResult,
+    navController: NavController
 ) {
     Scaffold() {
         it
         BottomSheetScaffold(
-
-            sheetContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+            sheetContainerColor = LightColorPalette.surfaceVariant,
             sheetContent = {
                 BSheetOptions(
-                    darkTheme,
+                    darkTheme = darkTheme,
                     weeklyResult = weeklyResult,
                     hourlyResult = hourlyResult,
                     airPollutionForecastResult = airPollutionForecastResult,
@@ -52,13 +52,13 @@ fun BottomSheetScaffold(
             sheetShape = bottomSheetShape
         ) {
             Image(
-                painterResource(id = if(darkTheme) R.drawable.bg_dark else R.drawable.bg_light),
+                painterResource(id = R.drawable.bg_light),
                 contentDescription = "",
                 modifier = Modifier.fillMaxHeight(),
                 contentScale = ContentScale.Crop,
-                alpha = if(darkTheme) 1f else 0.25f
+                alpha = 0.25f
             )
-            HomeScreenMainWeatherInfor(darkTheme = darkTheme, onThemeUpdated = onThemeUpdated, weatherDataList = weatherResult)
+            HomeScreenMainWeatherInfor(darkTheme = darkTheme, onThemeUpdated = onThemeUpdated , weatherDataList = weatherResult, navController = navController)
         }
 
     }

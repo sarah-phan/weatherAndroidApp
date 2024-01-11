@@ -10,13 +10,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,14 +25,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.zIndex
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp.data.Key.Companion.permissions
 import com.example.weatherapp.model.Coord
-import com.example.weatherapp.ui.screen.HomeScreen
+import com.example.weatherapp.ui.theme.SetupNavGraph
 import com.example.weatherapp.ui.theme.WeatherAppTheme
-//import com.example.weatherapp.ui.theme.lineColor
 import com.example.weatherapp.ui.theme.theme_light_primary
 import com.example.weatherapp.viewmodel.MainViewModel
 import com.example.weatherapp.viewmodel.STATE
@@ -52,6 +49,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var locationCallback: LocationCallback
     private lateinit var mainViewModel: MainViewModel
     private var locationRequired: Boolean = false
+    private lateinit var navController: NavHostController
     override fun onResume() {
         super.onResume()
         if(locationRequired)startLocationUpdate()
@@ -104,10 +102,12 @@ class MainActivity : ComponentActivity() {
                     //fetchWeatherData(mainViewModel,currentLocation)
                 }
             }
-            var darkTheme by remember { mutableStateOf(false)}
-            WeatherAppTheme(darktheme = darkTheme ) {
+            var darkTheme by remember {
+                mutableStateOf(false)
+            }
+            WeatherAppTheme(darktheme = darkTheme) {
                 Surface(
-                    color = MaterialTheme.colorScheme.outline,
+                    color = theme_light_primary,
                     modifier = Modifier.fillMaxSize()) {
                     var locationRequired: Boolean = false
                     val launcherMultiplePermissions = rememberLauncherForActivityResult(
@@ -144,8 +144,27 @@ class MainActivity : ComponentActivity() {
                             ErrorScreen(mainViewModel.errorMsg,currentLocation)
                         }
                         STATE.SUCCESS -> {
-
-                            HomeScreen(darkTheme,{darkTheme = !darkTheme},mainViewModel.weatherResponse, mainViewModel.weeklyResponse, mainViewModel.hourlyResponse, mainViewModel.airPollutionForecastResponse, mainViewModel.airPollutionCurrentResponse)
+                            navController = rememberNavController()
+                            SetupNavGraph(
+                                darkTheme,
+                                {darkTheme = !darkTheme},
+                                navController = navController,
+                                mainViewModel.weatherResponse,
+                                mainViewModel.weeklyResponse,
+                                mainViewModel.hourlyResponse,
+                                mainViewModel.airPollutionForecastResponse,
+                                mainViewModel.airPollutionCurrentResponse,
+                            )
+//                            HomeScreenWeekly(mainViewModel.weeklyResponse)
+//                            HomeScreenHourly(mainViewModel.hourlyResponse)
+//                            HomeScreen(
+//                                mainViewModel.weatherResponse,
+//                                mainViewModel.weeklyResponse,
+//                                mainViewModel.hourlyResponse,
+//                                mainViewModel.airPollutionForecastResponse,
+//                                mainViewModel.airPollutionCurrentResponse,
+//                                navController
+//                            )
                         }
                     }
                 }
@@ -170,6 +189,7 @@ class MainActivity : ComponentActivity() {
         mainViewModel.state = STATE.SUCCESS
     }
 }
+
 
 
 @Preview(showBackground = true, showSystemUi = true)

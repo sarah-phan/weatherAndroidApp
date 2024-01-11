@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
 import com.example.weatherapp.model.AirPollutionList
 import com.example.weatherapp.model.WeatherResult
-import com.example.weatherapp.ui.components.AirPollutionBox
+import com.example.weatherapp.ui.components.CurrentAirPollutionBox
 import com.example.weatherapp.ui.components.DataUiBox
 import com.example.weatherapp.ui.components.SunriseSunsetUiBox
 import com.example.weatherapp.ui.components.WindDirection
@@ -49,7 +49,6 @@ fun HomeScreenCurrentWeather(
     )
     val subTitleWind = listOf(
         R.string.direction,
-        R.string.gust,
         R.string.speed
     )
     val subTitleOther = listOf(
@@ -80,7 +79,6 @@ fun HomeScreenCurrentWeather(
     contentAtmosphericDetail.add("${weatherData.clouds?.all}%")
 
     contenWindDetail.add("${weatherData.wind?.deg}°${WindDirection(degree = weatherData.wind?.deg?.toDouble())}")
-    contenWindDetail.add("${weatherData.wind?.gust?.roundToInt()} mps")
     contenWindDetail.add("${weatherData.wind?.speed?.roundToInt()} mps")
 
     contentOtherDetail.add("${weatherData.visibility}m")
@@ -176,7 +174,7 @@ fun HomeScreenCurrentWeather(
         }
 
         //Air Quality
-        AirPollutionBox(airPollutionForecastResultSelected = airPollutionCurrentResultSelected)
+        CurrentAirPollutionBox(airPollutionCurrentResultSelected = airPollutionCurrentResultSelected)
 
         //Wind
         DataUiBox(
