@@ -24,6 +24,8 @@ import com.example.weatherapp.ui.theme.bottomSheetShape
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun BottomSheetScaffold(
+    darkTheme: Boolean,
+    onThemeUpdated: (Boolean) -> Unit,
     weeklyResult: WeekResult,
     hourlyResult: HourlyResult,
     weatherResult: WeatherResult,
@@ -37,6 +39,7 @@ fun BottomSheetScaffold(
             sheetContainerColor = LightColorPalette.surfaceVariant,
             sheetContent = {
                 BSheetOptions(
+                    darkTheme = darkTheme,
                     weeklyResult = weeklyResult,
                     hourlyResult = hourlyResult,
                     airPollutionForecastResult = airPollutionForecastResult,
@@ -55,7 +58,7 @@ fun BottomSheetScaffold(
                 contentScale = ContentScale.Crop,
                 alpha = 0.25f
             )
-            HomeScreenMainWeatherInfor(weatherDataList = weatherResult, navController = navController)
+            HomeScreenMainWeatherInfor(darkTheme = darkTheme, onThemeUpdated = onThemeUpdated , weatherDataList = weatherResult, navController = navController)
         }
 
     }

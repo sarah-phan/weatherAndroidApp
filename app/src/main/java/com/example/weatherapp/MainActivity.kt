@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -51,7 +50,6 @@ class MainActivity : ComponentActivity() {
     private lateinit var mainViewModel: MainViewModel
     private var locationRequired: Boolean = false
     private lateinit var navController: NavHostController
-
     override fun onResume() {
         super.onResume()
         if(locationRequired)startLocationUpdate()
@@ -104,7 +102,10 @@ class MainActivity : ComponentActivity() {
                     //fetchWeatherData(mainViewModel,currentLocation)
                 }
             }
-            WeatherAppTheme {
+            var darkTheme by remember {
+                mutableStateOf(false)
+            }
+            WeatherAppTheme(darktheme = darkTheme) {
                 Surface(
                     color = theme_light_primary,
                     modifier = Modifier.fillMaxSize()) {
@@ -145,12 +146,14 @@ class MainActivity : ComponentActivity() {
                         STATE.SUCCESS -> {
                             navController = rememberNavController()
                             SetupNavGraph(
+                                darkTheme,
+                                {darkTheme = !darkTheme},
                                 navController = navController,
                                 mainViewModel.weatherResponse,
                                 mainViewModel.weeklyResponse,
                                 mainViewModel.hourlyResponse,
                                 mainViewModel.airPollutionForecastResponse,
-                                mainViewModel.airPollutionCurrentResponse
+                                mainViewModel.airPollutionCurrentResponse,
                             )
 //                            HomeScreenWeekly(mainViewModel.weeklyResponse)
 //                            HomeScreenHourly(mainViewModel.hourlyResponse)
@@ -186,6 +189,7 @@ class MainActivity : ComponentActivity() {
         mainViewModel.state = STATE.SUCCESS
     }
 }
+
 
 
 @Preview(showBackground = true, showSystemUi = true)

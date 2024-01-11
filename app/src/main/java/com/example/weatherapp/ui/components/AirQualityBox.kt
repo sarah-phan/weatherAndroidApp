@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
 import com.example.weatherapp.model.AirPollutionList
 import com.example.weatherapp.ui.theme.Shapes
-import com.example.weatherapp.ui.theme.lineColor
 import kotlin.math.roundToInt
 
 @Composable
@@ -73,7 +72,7 @@ fun AirPollutionBox(
     }
     Box(
         modifier = Modifier.border(
-            border = BorderStroke(2.dp, lineColor), shape = Shapes.medium
+            border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline), shape = Shapes.medium
         ),
     ) {
         Column(
@@ -106,7 +105,7 @@ fun AirPollutionBox(
             )
             Divider(
                 thickness = 2.dp,
-                color = lineColor
+                color = MaterialTheme.colorScheme.outline
             )
 
             if(isExpanded){

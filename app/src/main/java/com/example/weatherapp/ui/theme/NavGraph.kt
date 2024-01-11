@@ -1,7 +1,6 @@
 package com.example.weatherapp.ui.theme
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,6 +14,8 @@ import com.example.weatherapp.ui.screen.InsertScreen
 
 @Composable
 fun SetupNavGraph(
+    darkTheme: Boolean,
+    onThemeUpdated: (Boolean)-> Unit,
     navController: NavHostController,
     weatherResult: WeatherResult,
     weeklyResult: WeekResult,
@@ -30,6 +31,8 @@ fun SetupNavGraph(
             route = Screen.Home.route
         ){
             HomeScreen(
+                darkTheme,
+                onThemeUpdated = onThemeUpdated,
                 weatherResult = weatherResult,
                 weeklyResult = weeklyResult,
                 hourlyResult = hourlyResult,

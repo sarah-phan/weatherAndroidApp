@@ -36,11 +36,11 @@ import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.model.WeekResult
 import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.Shapes
-import com.example.weatherapp.ui.theme.lineColor
 import kotlinx.coroutines.launch
 
 @Composable
 fun BSheetOptions(
+    darkTheme: Boolean,
     weeklyResult: WeekResult,
     hourlyResult: HourlyResult,
     airPollutionForecastResult: AirPollutionForecastResult,
@@ -105,22 +105,24 @@ fun BSheetOptions(
 
 
         Divider(
-            color = lineColor,
+            color = MaterialTheme.colorScheme.outline,
             thickness = 1.dp,
             modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_small))
         )
 
         if (optionButtonsChosen == 0) {
             TabList(
+                darkTheme,
                 resultData = weatherResult,
                 airPollutionCurrentResult = airPollutionCurrentResult
             )
         } else if (optionButtonsChosen == 1) {
             TabList(
+                darkTheme,
                 resultData = hourlyResult, airPollutionForecastResult = airPollutionForecastResult
             )
         }else if (optionButtonsChosen == 2){
-            TabList(resultData = weeklyResult)
+            TabList(darkTheme, resultData = weeklyResult)
         }
     }
 }

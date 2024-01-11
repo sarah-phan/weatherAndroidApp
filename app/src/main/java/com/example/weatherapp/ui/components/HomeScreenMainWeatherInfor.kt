@@ -11,12 +11,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,14 +28,15 @@ import com.example.weatherapp.R
 import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.ui.theme.Manjari
 import com.example.weatherapp.ui.theme.Screen
-import com.example.weatherapp.ui.theme.theme_light_onSurfaceContainer
-import com.example.weatherapp.ui.theme.theme_light_tertiary
+
 
 @Composable
 fun HomeScreenMainWeatherInfor(
     weatherDataList: WeatherResult,
+    darkTheme: Boolean,
+    onThemeUpdated: (Boolean)-> Unit,
     navController: NavController
-) {
+    ) {
     val cityName: String = weatherDataList.name.toString()
     val countryName: String = weatherDataList.sys?.country.toString()
     val weatherDescription = weatherDataList.weather?.firstOrNull()?.main.toString()
@@ -48,17 +50,28 @@ fun HomeScreenMainWeatherInfor(
     val winDescription: String = weatherDataList.wind?.speed.toString()
     val keepDryImage = painterResource(id = R.drawable.keep_dry_color)
     val dryDescription: String = weatherDataList.main?.humidity.toString()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        Image(
-            painter = image,
-            contentDescription = null,
-            modifier = Modifier
-                .size(30.dp)
-                .clickable { navController.navigate(route = Screen.Insert.route) }
-        )
+        Row(modifier = Modifier
+                .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
+            Image(
+                painter = image,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(30.dp)
+                    .clickable { navController.navigate(Screen.Insert.route) }
+            )
+            Switch(
+                checked = darkTheme,
+                onCheckedChange = onThemeUpdated,
+            )
+        }
+
+
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
@@ -66,7 +79,7 @@ fun HomeScreenMainWeatherInfor(
         ) {
             Text(
                 text = cityName,
-                color = theme_light_onSurfaceContainer,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontFamily = Manjari,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -76,7 +89,7 @@ fun HomeScreenMainWeatherInfor(
             )
             Text(
                 text = countryName,
-                color = theme_light_tertiary,
+                color = MaterialTheme.colorScheme.tertiary,
                 fontFamily = Manjari,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -89,13 +102,13 @@ fun HomeScreenMainWeatherInfor(
         ) {
             Text(
                 text = weatherTemperature,
-                color = theme_light_onSurfaceContainer,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontFamily = Manjari,
                 fontSize = 32.sp,
             )
             Text(
                 text = weatherDescription,
-                color = theme_light_onSurfaceContainer,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontFamily = Manjari,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
@@ -106,7 +119,7 @@ fun HomeScreenMainWeatherInfor(
             ) {
                 Text(
                     text = "Max: $maxTemp",
-                    color = theme_light_onSurfaceContainer,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontFamily = Manjari,
                     fontSize = 16.sp,
                     modifier = Modifier
@@ -114,7 +127,7 @@ fun HomeScreenMainWeatherInfor(
                 )
                 Text(
                     text = "Min: $minTemp",
-                    color = theme_light_onSurfaceContainer,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontFamily = Manjari,
                     fontSize = 16.sp,
                     modifier = Modifier
@@ -159,21 +172,21 @@ fun HomeScreenMainWeatherInfor(
                 ) {
                     Text(
                         text = weatherDescriptionDetail,
-                        color = theme_light_onSurfaceContainer,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontFamily = Manjari,
                         fontSize = 16.sp,
                         modifier = Modifier
                     )
                     Text(
                         text = "$winDescription mps",
-                        color = theme_light_onSurfaceContainer,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontFamily = Manjari,
                         fontSize = 16.sp,
                         modifier = Modifier
                     )
                     Text(
                         text = "$dryDescription %",
-                        color = theme_light_onSurfaceContainer,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontFamily = Manjari,
                         fontSize = 16.sp,
                     )

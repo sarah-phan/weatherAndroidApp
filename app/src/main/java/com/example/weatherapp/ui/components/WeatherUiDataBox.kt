@@ -24,7 +24,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
 import com.example.weatherapp.ui.theme.Shapes
-import com.example.weatherapp.ui.theme.lineColor
 
 @Composable
 fun DataUiBox(
@@ -35,7 +34,7 @@ fun DataUiBox(
     val combinedList = content.zip(subTitle)
     Box(
         modifier = Modifier.border(
-                border = BorderStroke(2.dp, lineColor), shape = Shapes.medium
+                border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline), shape = Shapes.medium
             )
     ) {
         Column(
@@ -82,7 +81,7 @@ fun SunriseSunsetUiBox(
     title: String,
     content: String,
     imageId: Int,
-) {
+    ) {
     Column(
         modifier = Modifier
             .padding(
