@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
@@ -18,7 +19,6 @@ import com.example.weatherapp.model.AirPollutionForecastResult
 import com.example.weatherapp.model.HourlyResult
 import com.example.weatherapp.model.WeatherResult
 import com.example.weatherapp.model.WeekResult
-import com.example.weatherapp.ui.theme.LightColorPalette
 import com.example.weatherapp.ui.theme.bottomSheetShape
 
 @Composable
@@ -36,7 +36,7 @@ fun BottomSheetScaffold(
     Scaffold() {
         it
         BottomSheetScaffold(
-            sheetContainerColor = LightColorPalette.surfaceVariant,
+            sheetContainerColor = MaterialTheme.colorScheme.surfaceVariant,
             sheetContent = {
                 BSheetOptions(
                     darkTheme = darkTheme,
@@ -52,11 +52,11 @@ fun BottomSheetScaffold(
             sheetShape = bottomSheetShape
         ) {
             Image(
-                painterResource(id = R.drawable.bg_light),
+                painterResource(id = if(darkTheme) R.drawable.bg_dark else R.drawable.bg_light),
                 contentDescription = "",
                 modifier = Modifier.fillMaxHeight(),
                 contentScale = ContentScale.Crop,
-                alpha = 0.25f
+                alpha = if(darkTheme) 1f else 0.25f
             )
             HomeScreenMainWeatherInfor(darkTheme = darkTheme, onThemeUpdated = onThemeUpdated , weatherDataList = weatherResult, navController = navController)
         }
