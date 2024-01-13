@@ -53,7 +53,7 @@ fun BSheetOptions(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = LightColorPalette.surfaceVariant)
+            .background(color = MaterialTheme.colorScheme.surfaceVariant)
             .verticalScroll(rememberScrollState())
     ) {
         val lazyListState = rememberLazyListState()
@@ -83,18 +83,18 @@ fun BSheetOptions(
                     },
                     shape = Shapes.medium,
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isOptionButtonsChosen) LightColorPalette.secondary else Color.Transparent,
+                        containerColor = if (isOptionButtonsChosen) MaterialTheme.colorScheme.secondary else Color.Transparent,
                     ),
                     modifier = Modifier
                         .padding(0.dp)
                         .widthIn(max = 150.dp),
                     border = BorderStroke(
-                        width = 1.dp, color = LightColorPalette.secondary
+                        width = 1.dp, color = MaterialTheme.colorScheme.secondary
                     )
                 ) {
                     Text(
                         text = optionButtons[index],
-                        color = if (isOptionButtonsChosen) LightColorPalette.onSecondary else LightColorPalette.onSurfaceVariant,
+                        color = if (isOptionButtonsChosen) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.titleSmall,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.padding(0.dp)
